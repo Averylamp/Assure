@@ -157,8 +157,10 @@ def getClosestModule():
 	print("Closest Module - {}, Distance - {},     MAC - {}".format(min_module, min_distance, min_mac))
 	return "Closest Module - {}, Distance - {},     MAC - {}".format(min_module, min_distance, min_mac)
 
-@app.route('/sendText', methods=['POST'])
+@app.route('/sendText/', methods=['GET','POST'])
 def send_message():
+	print("------------------------------")
+	print("Send text initiated")
 	if request.values.get("message") is None:
 		return "No message sent"
 	else:
@@ -168,11 +170,11 @@ def send_message():
 	client = Client(account_sid, auth_token)
 
 	numbers = ["+19738738225","+19202860426","+16268727820","+13233948643"]
-    for i in numbers:
-        message = client.api.account.messages.create(to=i,
-                                                from_="+16265514837",
-                                                body=text)
-        print(message.sid)
+	for i in numbers:
+		message = client.api.account.messages.create(to=i,from_="+16265514837",body=text)
+		print(message.sid)
+		print("Sent Message")
+	return "Success, sent messages"
 
 
 # run the app!
