@@ -113,7 +113,7 @@ def getClosestModule():
 		r = requests.get("http://assure-parse.herokuapp.com/parse/classes/ProbeRequests", headers=parse_headers, params= params)
 		# print(r.text)
 		parse_results = r.json()["results"]
-		
+		print("Number of results - {}".format(len(parse_results)))
 		filtered_results = []
 		for i in parse_results:
 			if withinSecondsFromNow(i["createdAt"][:-5], total_seconds_max):
@@ -121,6 +121,7 @@ def getClosestModule():
 			else:
 				continue
 		parse_results = filtered_results
+		print("Number of filtered results - {}".format(len(parse_results)))
 		if len(parse_results) == 0:
 			distances[mac_address] = 1000
 			continue
