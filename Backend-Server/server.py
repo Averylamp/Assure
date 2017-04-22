@@ -6,7 +6,7 @@
 from flask import Flask, request
 import requests, json
 import numpy as np
-from datetime import datetime
+from datetime import datetime, timedelta
 from twilio.rest import Client
 #begin a flask app
 app = Flask(__name__)
@@ -73,10 +73,10 @@ def processIncomingGetData():
 def withinSecondsFromNow(datestring, seconds):
 	format_str = "%Y-%m-%dT%H:%M:%S"
 	datetime_obj = datetime.strptime(datestring, format_str)
-	datetime_obj = datetime_obj.replace(hour = datetime_obj.hour - 4)
+#	datetime_obj = datetime_obj + timedelta(hours=0)
 	now = datetime.now()
 	difference = now - datetime_obj
-
+	print("Difference seconds = {}".format(difference.total_seconds()))
 	return difference.total_seconds() < seconds
 
 @app.route('/closestModule', methods=['GET'])
@@ -90,11 +90,11 @@ def getClosestModule():
 	if request.values.get("from_date") is None:
 		format_str = "%Y-%m-%dT%H:%M:%S.000Z"
 		datetime_obj = datetime.now()
-		datetime_obj = datetime_obj.replace(hour = datetime_obj.hour + 4)
+	#	datetime_obj = datetime_obj + timedelta(hours=4)
 		date_query = datetime_obj.strftime(format_str)
 	else:
 		date_query = request.values.get("from_date")
-
+	print("Date - {}".format(date_query))
 	total_seconds_max = 120
 
 	def stringToMAC(string_in):
