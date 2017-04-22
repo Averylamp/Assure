@@ -7,6 +7,7 @@ from flask import Flask, request
 import requests, json
 import numpy as np
 from datetime import datetime
+from twilio.rest import Client
 #begin a flask app
 app = Flask(__name__)
 
@@ -85,6 +86,7 @@ def getClosestModule():
 	config_results = r.json()["params"]
 
 	date_query = ""
+	# from_date = "%Y-%m-%dT%H:%M:%S.000Z"
 	if request.values.get("from_date") is None:
 		format_str = "%Y-%m-%dT%H:%M:%S.000Z"
 		datetime_obj = datetime.now()
@@ -154,6 +156,24 @@ def getClosestModule():
 		return "No closest module"
 	print("Closest Module - {}, Distance - {},     MAC - {}".format(min_module, min_distance, min_mac))
 	return "Closest Module - {}, Distance - {},     MAC - {}".format(min_module, min_distance, min_mac)
+
+@app.route('/sendText', methods=['POST'])
+def send_message():
+	if request.values.get("message") is None:
+		return "No message sent"
+	else:
+		text = request.values.get("message")
+	account_sid = "AC8297f68c93c5374aec9089e8fabfc089"
+	auth_token = "118545b140865a4db481070ed8092699"
+	client = Client(account_sid, auth_token)
+
+	numbers = ["+19738738225","+19202860426","+16268727820","+13233948643"]
+    for i in numbers:
+        message = client.api.account.messages.create(to=i,
+                                                from_="+16265514837",
+                                                body=text)
+        print(message.sid)
+
 
 # run the app!
 if __name__ == "__main__":
