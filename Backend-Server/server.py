@@ -6,7 +6,7 @@
 from flask import Flask, request
 import requests, json
 import numpy as np
-from datetime import datetime
+from datetime import datetime, timedelta
 from twilio.rest import Client
 #begin a flask app
 app = Flask(__name__)
@@ -73,10 +73,10 @@ def processIncomingGetData():
 def withinSecondsFromNow(datestring, seconds):
 	format_str = "%Y-%m-%dT%H:%M:%S"
 	datetime_obj = datetime.strptime(datestring, format_str)
-	datetime_obj = datetime_obj.replace(hour = datetime_obj.hour - 4)
+#	datetime_obj = datetime_obj + timedelta(hours=0)
 	now = datetime.now()
 	difference = now - datetime_obj
-
+#	print("Difference seconds = {}".format(difference.total_seconds()))
 	return difference.total_seconds() < seconds
 
 @app.route('/closestModule', methods=['GET'])
@@ -90,11 +90,11 @@ def getClosestModule():
 	if request.values.get("from_date") is None:
 		format_str = "%Y-%m-%dT%H:%M:%S.000Z"
 		datetime_obj = datetime.now()
-		datetime_obj = datetime_obj.replace(hour = datetime_obj.hour + 4)
+	#	datetime_obj = datetime_obj + timedelta(hours=4)
 		date_query = datetime_obj.strftime(format_str)
 	else:
 		date_query = request.values.get("from_date")
-
+#	print("Date - {}".format(date_query))
 	total_seconds_max = 120
 
 	def stringToMAC(string_in):
@@ -115,7 +115,7 @@ def getClosestModule():
 		r = requests.get("http://assure-parse.herokuapp.com/parse/classes/ProbeRequests", headers=parse_headers, params= params)
 		# print(r.text)
 		parse_results = r.json()["results"]
-		
+		print("Number of results - {}".format(len(parse_results)))
 		filtered_results = []
 		for i in parse_results:
 			if withinSecondsFromNow(i["createdAt"][:-5], total_seconds_max):
@@ -123,6 +123,7 @@ def getClosestModule():
 			else:
 				continue
 		parse_results = filtered_results
+		print("Number of filtered results - {}".format(len(parse_results)))
 		if len(parse_results) == 0:
 			distances[mac_address] = 1000
 			continue
@@ -156,8 +157,10 @@ def getClosestModule():
 	print("Closest Module - {}, Distance - {},     MAC - {}".format(min_module, min_distance, min_mac))
 	return "Closest Module - {}, Distance - {},     MAC - {}".format(min_module, min_distance, min_mac)
 
-@app.route('/sendText', methods=['POST'])
+@app.route('/sendText/', methods=['GET','POST'])
 def send_message():
+	print("------------------------------")
+	print("Send text initiated")
 	if request.values.get("message") is None:
 		return "No message sent"
 	else:
@@ -166,12 +169,12 @@ def send_message():
 	auth_token = "118545b140865a4db481070ed8092699"
 	client = Client(account_sid, auth_token)
 
-	numbers = ["+19738738225","+19202860426","+16268727820","+13233948643"]
-    for i in numbers:
-        message = client.api.account.messages.create(to=i,
-                                                from_="+16265514837",
-                                                body=text)
-        print(message.sid)
+	numbers = ["+19738738225","+19202860426","+16268727820","+13233948643","+13153833921"]
+	for i in numbers:
+		message = client.api.account.messages.create(to=i,from_="+16265514837",body=text)
+		print(message.sid)
+		print("Sent Message")
+	return "Success, sent messages"
 
 
 # run the app!
