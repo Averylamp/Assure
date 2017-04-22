@@ -68,11 +68,22 @@ def processIncomingGetData():
 	print "GET REQUEST"
 	return "GET out of town. Get it? Get it."
 
+def withinSecondsFromNow(datestring, seconds):
+	format_str = "%Y-%m-%dT%H:%M:%S"
+	datetime_obj = datetime.strptime(datestring, format_str)
+	datetime_obj = datetime_obj.replace(hour = datetime_obj.hour - 4)
+	now = datetime.now()
+	difference = now - datetime_obj
+
+	return difference.total_seconds() < seconds
+
 @app.route('/closestModule', methods=['GET'])
 def getClosestModule():
 	parse_headers = {"X-Parse-Application-Id":"assure-parse-app","Content-Type":"application/json"}
 	r = requests.get("http://assure-parse.herokuapp.com/parse/config", headers=parse_headers)
 	config_results = r.json()["params"]
+
+	total_seconds_max = 120
 
 	def stringToMAC(string_in):
 		config_results = ""
@@ -94,6 +105,12 @@ def getClosestModule():
 		if len(parse_results) == 0:
 			distances[mac_address] = 1000
 			continue
+		filtered_results = []
+		for i in parse_results:
+			if withinSecondsFromNow(i["createdAt"][:-5], total_seconds_max):
+				filtered_results.append(i)
+			else:
+				continue
 		mid = 1.0 / len(parse_results)
 		median = float(len(parse_results) / 2)
 		distance = 0
