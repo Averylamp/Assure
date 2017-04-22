@@ -46,8 +46,8 @@ def processIncomingPostData():
 			else:
 				next_distance = mean - std
 			print("Modified distance - {}".format(next_distance))
-		if len(last_values["fromMAC"]) >= 10:
-			last_values["fromMAC"] =  last_values["fromMAC"][1:] + [next_distance]
+		if len(last_values[data["fromMAC"]]) >= 10:
+			last_values[data["fromMAC"]] =  last_values[data["fromMAC"]][1:] + [next_distance]
 		data["distance"] = next_distance
 	else:
 		last_values[data["fromMAC"]] = [float(data["distance"])]
