@@ -83,6 +83,15 @@ def getClosestModule():
 	r = requests.get("http://assure-parse.herokuapp.com/parse/config", headers=parse_headers)
 	config_results = r.json()["params"]
 
+	date_query = ""
+	if request.values.get("from_date") is None:
+		format_str = "%Y-%m-%dT%H:%M:%S.000Z"
+		datetime_obj = datetime.now()
+		datetime_obj = datetime_obj.replace(hour = datetime_obj.hour + 4)
+		date_query = datetime_obj.strftime(format_str)
+	else:
+		date_query = request.values.get("from_date")
+
 	total_seconds_max = 120
 
 	def stringToMAC(string_in):
@@ -99,18 +108,22 @@ def getClosestModule():
 	distances = {}
 	for mac in config_results.keys():
 		mac_address = stringToMAC(mac)
-		params = {"where":json.dumps({"fromMAC":mac_address}), "limit": 25, "order":"-createdAt"}
+		params = {"where":json.dumps({"fromMAC":mac_address,"createdAt":{"$lte":{"__type":"Date","iso":date_query}}}), "limit": 25, "order":"-createdAt"}
 		r = requests.get("http://assure-parse.herokuapp.com/parse/classes/ProbeRequests", headers=parse_headers, params= params)
+		# print(r.text)
 		parse_results = r.json()["results"]
-		if len(parse_results) == 0:
-			distances[mac_address] = 1000
-			continue
+		
 		filtered_results = []
 		for i in parse_results:
 			if withinSecondsFromNow(i["createdAt"][:-5], total_seconds_max):
 				filtered_results.append(i)
 			else:
 				continue
+		parse_results = filtered_results
+		if len(parse_results) == 0:
+			distances[mac_address] = 1000
+			continue
+		print(parse_results[0]["createdAt"])
 		mid = 1.0 / len(parse_results)
 		median = float(len(parse_results) / 2)
 		distance = 0
@@ -134,8 +147,10 @@ def getClosestModule():
 			min_mac = item[0]
 			min_module = config_results[min_mac.replace(":", "")]
 
+	if min_distance == 1000:
+		print("No closest module")
+		return "No closest module"
 	print("Closest Module - {}, Distance - {},     MAC - {}".format(min_module, min_distance, min_mac))
-
 	return "Closest Module - {}, Distance - {},     MAC - {}".format(min_module, min_distance, min_mac)
 
 # run the app!
