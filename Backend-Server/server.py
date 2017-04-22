@@ -39,6 +39,7 @@ def processIncomingPostData():
 	if data["fromMAC"] in last_values:
 		mean = np.mean(last_values[data["fromMAC"]])
 		std = np.std(last_values[data["fromMAC"]])
+		print("Mean - {}, Std -{}, Expected range - {}, {}".format(mean, std, mean - std, mean + std))
 		next_distance = float(data["distance"])
 		if abs(next_distance - mean) > std:
 			if next_distance > mean:
@@ -48,7 +49,7 @@ def processIncomingPostData():
 			print("Modified distance - {}".format(next_distance))
 		if len(last_values[data["fromMAC"]]) >= 10:
 			last_values[data["fromMAC"]] =  last_values[data["fromMAC"]][1:] + [next_distance]
-		data["distance"] = next_distance
+		data["distance"] = str(next_distance)
 	else:
 		last_values[data["fromMAC"]] = [float(data["distance"])]
 	data = json.dumps(data)
