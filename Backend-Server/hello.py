@@ -16,7 +16,8 @@ def processIncomingPostData():
 	print request.values.get("from_mac")
 	print request.values.get("device")
 	print request.values.get("rssi")
-	if request.values.get("from_mac:") is None:
+	if request.values.get("from_mac") is None:
+		print("invalid params")
 		return "No valid parameters"
 
 	data = {}
@@ -24,13 +25,16 @@ def processIncomingPostData():
 	device = request.values.get("device")
 	rssi =  request.values.get("rssi")
 	data["rssi"] = rssi
-	print(type(rssi))
-	data["distance"] = str(10 ** ((-45 - int(rssi)) / 20))
+	data["distance"] = str(10 ** ((-45 - int(rssi)) / 20.0))
+	print("Distance - {}".format(data["distance"]))
 	data = json.dumps(data)
 	parse_headers = {"X-Parse-Application-Id":"assure-parse-app","Content-Type":"application/json"}
-	
 	r = requests.post("http://assure-parse.herokuapp.com/parse/classes/ProbeRequests", headers=parse_headers, data = data)
-
+	if r.status_code == 201:
+		print("Parse object created")
+	else:
+		print("Error adding to database")
+		print(r.text)
 	#return a message.
 	return "Thank you for your data."
 
