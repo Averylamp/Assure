@@ -5,8 +5,11 @@
 #import the main flask, and request (to handle post request parameters) 
 from flask import Flask, request
 import requests, json
+import numpy as np
 #begin a flask app
 app = Flask(__name__)
+
+last_values = {}
 
 #Handle post requests from the root directory
 @app.route('/', methods=['POST'])
@@ -31,6 +34,23 @@ def processIncomingPostData():
 		print("NO RESPONSE RECIEVED FROM DEVICE - {}".format(devices[data["fromMAC"]]))
 		return "No recent Probe requests"
 	print("Distance - {}".format(data["distance"]))
+
+	global last_values
+	if data["fromMAC"] in last_values:
+		mean = np.mean(last_values[data["fromMAC"]])
+		std = np.std(last_values[data["fromMAC"]])
+		next_distance = float(data["distance"])
+		if abs(next_distance - mean) > std:
+			if next_distance > mean:
+				next_distance = mean + std
+			else:
+				next_distance = mean - std
+			print("Modified distance - {}".format(next_distance))
+		if len(last_values["fromMAC"] >= 10):
+			last_values["fromMAC"] =  last_values["fromMAC"][1:] + [next_distance]
+		data["distance"] = next_distance
+	else:
+		last_values[data["fromMAC"]] = [float(data["distance"])]
 	data = json.dumps(data)
 	parse_headers = {"X-Parse-Application-Id":"assure-parse-app","Content-Type":"application/json"}
 	r = requests.post("http://assure-parse.herokuapp.com/parse/classes/ProbeRequests", headers=parse_headers, data = data)
