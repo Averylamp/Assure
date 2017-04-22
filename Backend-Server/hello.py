@@ -16,12 +16,15 @@ def processIncomingPostData():
 	print request.values.get("from_mac")
 	print request.values.get("device")
 	print request.values.get("rssi")
+	if request.values.get("from_mac:") is None:
+		return "No valid parameters"
 
 	data = {}
 	data["fromMAC"] =  request.values.get("from_mac")
 	device = request.values.get("device")
 	rssi =  request.values.get("rssi")
 	data["rssi"] = rssi
+	print(type(rssi))
 	data["distance"] = str(10 ** ((-45 - int(rssi)) / 20))
 	data = json.dumps(data)
 	parse_headers = {"X-Parse-Application-Id":"assure-parse-app","Content-Type":"application/json"}
