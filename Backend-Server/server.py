@@ -76,7 +76,7 @@ def withinSecondsFromNow(datestring, seconds):
 #	datetime_obj = datetime_obj + timedelta(hours=0)
 	now = datetime.now()
 	difference = now - datetime_obj
-	print("Difference seconds = {}".format(difference.total_seconds()))
+#	print("Difference seconds = {}".format(difference.total_seconds()))
 	return difference.total_seconds() < seconds
 
 @app.route('/closestModule', methods=['GET'])
@@ -94,7 +94,7 @@ def getClosestModule():
 		date_query = datetime_obj.strftime(format_str)
 	else:
 		date_query = request.values.get("from_date")
-	print("Date - {}".format(date_query))
+#	print("Date - {}".format(date_query))
 	total_seconds_max = 120
 
 	def stringToMAC(string_in):
