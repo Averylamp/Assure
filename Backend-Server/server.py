@@ -38,7 +38,7 @@ def processIncomingPostData():
 	global last_values
 	if data["fromMAC"] in last_values:
 		mean = np.mean(last_values[data["fromMAC"]])
-		std = np.std(last_values[data["fromMAC"]])
+		std = np.std(last_values[data["fromMAC"]]) + 5
 		print("Mean - {}, Std -{}, Expected range - {}, {}".format(mean, std, mean - std, mean + std))
 		next_distance = float(data["distance"])
 		if abs(next_distance - mean) > std:
