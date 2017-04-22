@@ -18,9 +18,10 @@ print(config_results)
 distances = {}
 for mac in config_results.keys():
 	mac_address = stringToMAC(mac)
-	params = {"where":json.dumps({"fromMAC":mac_address}), "limit": 25, "order":"-createdAt"}
+	params = {"where":json.dumps({"fromMAC":mac_address}), "limit": 15, "order":"-createdAt"}
 	r = requests.get("http://assure-parse.herokuapp.com/parse/classes/ProbeRequests", headers=parse_headers, params= params)
 	parse_results = r.json()["results"]
+	# print(parse_results)
 	if len(parse_results) == 0:
 		distances[mac_address] = 1000
 		continue

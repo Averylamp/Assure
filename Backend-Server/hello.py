@@ -16,7 +16,7 @@ def processIncomingPostData():
 	print request.values.get("from_mac")
 	print request.values.get("device")
 	print request.values.get("rssi")
-	if request.values.get("from_mac") is None:
+	if request.values.get("from_mac") is None or request.values.get("rssi") == "0":
 		print("invalid params")
 		return "No valid parameters"
 
