@@ -169,7 +169,7 @@ def send_message():
 	auth_token = "118545b140865a4db481070ed8092699"
 	client = Client(account_sid, auth_token)
 
-	numbers = ["+19738738225","+19202860426","+16268727820","+13233948643"]
+	numbers = ["+19738738225","+19202860426","+16268727820","+13233948643","+13153833921"]
 	for i in numbers:
 		message = client.api.account.messages.create(to=i,from_="+16265514837",body=text)
 		print(message.sid)
