@@ -15,7 +15,7 @@ def processIncomingPostData():
 	# print request.values.get("from_mac")
 	# print request.values.get("device")
 	# print request.values.get("rssi")
-	if request.values.get("from_mac") is None or request.values.get("rssi") == "0":
+	if request.values.get("from_mac") is None:
 		print("invalid params")
 		return "No valid parameters"
 	devices = {'A0:20:A6:0F:26:15': '2', 'A0:20:A6:01:56:52': '4', 'A0:20:A6:0F:28:9B': '1', 'A0:20:A6:01:53:54': '3', 'A0:20:A6:0F:29:0F': '5'}
@@ -27,6 +27,9 @@ def processIncomingPostData():
 	data["rssi"] = rssi
 	data["distance"] = str(10 ** ((-45 - int(rssi)) / 20.0))
 	print("Request recieved from - {}, distance - {},  rssi - {}".format(devices[data["fromMAC"]], data["distance"], data["rssi"]))
+	if request.values.get("rssi") == "0":
+		print("NO RESPONSE RECIEVED FROM DEVICE - {}".format(devices[data["fromMAC"]]))
+		return "No recent Probe requests"
 	print("Distance - {}".format(data["distance"]))
 	data = json.dumps(data)
 	parse_headers = {"X-Parse-Application-Id":"assure-parse-app","Content-Type":"application/json"}
