@@ -36,7 +36,7 @@ class MainVC: UIViewController {
 		//Set up all main views
 		setupGraphView()
 		setupMiddleSection()
-		//setupBottomSection()
+		setupBottomSection()
 		
 		runTimer()
 	}
@@ -114,7 +114,6 @@ class MainVC: UIViewController {
 		box.layer.borderColor = UIColor.black.cgColor
 		view.addSubview(box)
 		
-		
 		let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(recognizer:)))
 		box.addGestureRecognizer(pan)
 	}
@@ -144,8 +143,6 @@ class MainVC: UIViewController {
 			} else {
 				graphView.setGraphValues(v1: 5, v2: 45, v3: 5, v4: 5)
 			}
-			
-			
 		}
 		recognizer.setTranslation(CGPoint.zero, in: self.view)
 	}
@@ -153,21 +150,26 @@ class MainVC: UIViewController {
 	
 	//sets up the bottom area of the main view
 	func setupBottomSection() {
-		//Bottom View
-		let bottomView = UIView()
-		bottomView.backgroundColor = UIColor(colorLiteralRed: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 1)
-		bottomView.frame = CGRect(x: 0, y: 555, width: view.frame.width, height: view.frame.height-555)
-		view.addSubview(bottomView)
 		
-		//Grandpa Status Bar
-		grandpaStatusLabel.backgroundColor = UIColor(colorLiteralRed: 201/255.0, green: 201/255.0, blue: 201/255.0, alpha: 1)
-		grandpaStatusLabel.frame = CGRect(x: 0, y: 529, width: view.frame.width, height: 26)
-		grandpaStatusLabel.text = "Grandpa is currently in the kitchen"
-		grandpaStatusLabel.font = UIFont (name: "Avenir-Book", size: 16)
-		grandpaStatusLabel.textAlignment = NSTextAlignment.center
-		view.addSubview(grandpaStatusLabel)
+		let ivWidth = view.frame.width/2.0-40
+		let ivHeight = 0.490797546 * ivWidth
 		
-		getAndSetGrandpaLocationStatus()
+		bedroomIV.frame = CGRect(x: 20, y: leftBar.frame.maxY+50, width: ivWidth, height: ivHeight)
+		bedroomIV.image = UIImage(named: "bedroomoff.png")
+		view.addSubview(bedroomIV)
+		
+		bathroomIV.frame = CGRect(x: bedroomIV.frame.maxX+40, y: leftBar.frame.maxY+50, width: ivWidth, height: ivHeight)
+		bathroomIV.image = UIImage(named: "bathroomoff.png")
+		view.addSubview(bathroomIV)
+		
+		kitchenIV.frame = CGRect(x: bedroomIV.frame.maxX+40, y: bedroomIV.frame.maxY + 40, width: ivWidth, height: ivHeight)
+		kitchenIV.image = UIImage(named: "kitchenoff.png")
+		view.addSubview(kitchenIV)
+		
+		livingIV.frame = CGRect(x: 20, y: bedroomIV.frame.maxY + 40, width: ivWidth, height: ivHeight)
+		livingIV.image = UIImage(named: "livingoff.png")
+		view.addSubview(livingIV)
+		
 	}
 	
 	//this occurs on ecah touch, mostly used for debugging & testing
@@ -184,38 +186,75 @@ class MainVC: UIViewController {
 				return
 			}
 			let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-			print(result ?? "You can't see this.")
+			
+			let closestRoomAsStringWithNum = result[result.startIndex]
+			
+			
+			
+			
 		}
 		
 		task.resume()
 	}
 
-	func getAndSetGrandpaLocationStatus() {
-		let gLocation = ""
-		
-		//LOGIC FOR NAMING LOCATION HERE
-		let url = URL(string: "http://23.92.20.162:5000/get-location/")
-		
-		let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
-			if error != nil {
-				print("Is the server running? Well you better go catch it.")
-				return
-			}
-			let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-			print(result ?? "You can't see this.")
-		}
-		
-		task.resume()
-		
-		//grandpaStatusLabel.text = "Grandpa is currenty in the \(gLocation)"
-	}
+//	func getAndSetGrandpaLocationStatus() {
+//		let gLocation = ""
+//		
+//		//LOGIC FOR NAMING LOCATION HERE
+//		let url = URL(string: "http://23.92.20.162:5000/get-location/")
+//		
+//		let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+//			if error != nil {
+//				print("Is the server running? Well you better go catch it.")
+//				return
+//			}
+//			let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+//			print(result ?? "You can't see this.")
+//			
+//			
+//			
+//		}
+//		
+//		task.resume()
+//		
+//		
+//		//grandpaStatusLabel.text = "Grandpa is currenty in the \(gLocation)"
+//	}
 	
 	func runTimer() {
-		var timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.grabModule), userInfo: nil, repeats: true)
+		let timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.grabModule), userInfo: nil, repeats: true)
 		timer.fire()
 	}
 	
 	func grabModule() {
 		getGeneralLocationInfo()
+	}
+	
+	func turnBedroomOn() {
+		bedroomIV.image = UIImage(named: "bedroomon.png")
+		bathroomIV.image = UIImage(named: "bathroomoff.png")
+		kitchenIV.image = UIImage(named: "kitchenoff.png")
+		livingIV.image = UIImage(named: "livingoff.png")
+	}
+	
+	func turnBathroomOn() {
+		bedroomIV.image = UIImage(named: "bedroomoff.png")
+		bathroomIV.image = UIImage(named: "bathroomon.png")
+		kitchenIV.image = UIImage(named: "kitchenoff.png")
+		livingIV.image = UIImage(named: "livingoff.png")
+	}
+	
+	func turnKitchenOn() {
+		bedroomIV.image = UIImage(named: "bedroomoff.png")
+		bathroomIV.image = UIImage(named: "bathroomoff.png")
+		kitchenIV.image = UIImage(named: "kitchenon.png")
+		livingIV.image = UIImage(named: "livingoff.png")
+	}
+	
+	func turnLivingOn() {
+		bedroomIV.image = UIImage(named: "bedroomoff.png")
+		bathroomIV.image = UIImage(named: "bathroomoff.png")
+		kitchenIV.image = UIImage(named: "kitchenoff.png")
+		livingIV.image = UIImage(named: "livingon.png")
 	}
 }
