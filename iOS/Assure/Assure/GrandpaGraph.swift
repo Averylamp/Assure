@@ -108,7 +108,6 @@ class GrandpaGraph: UIView {
 		let h4 = v4/maxTime * maxHeight
 		print(graphBar1.frame)
 		
-		
 		UIView.animate(withDuration: 0.5, delay: 0.4,
 		               options: [.curveEaseInOut],
 		               animations: {

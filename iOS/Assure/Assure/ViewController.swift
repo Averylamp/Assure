@@ -22,12 +22,3 @@ class ViewController: UIViewController {
 
 
 }
-
-//GLOBAL UI LOOK
-
-//extension UILabel{
-//	var defaultFont: UIFont? {
-//		get { return self.font }
-//		set { self.font = UIFont (name: "Avenir-Book", size: 16) }
-//	}
-//}
