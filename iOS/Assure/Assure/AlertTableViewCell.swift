@@ -16,6 +16,7 @@ class AlertTableViewCell: UITableViewCell {
     
     @IBOutlet weak var resolvedButton: UIButton!
     
+    @IBOutlet weak var coverView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

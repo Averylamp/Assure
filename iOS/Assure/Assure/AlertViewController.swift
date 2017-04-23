@@ -25,6 +25,7 @@ class AlertViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func fetchAlerts(){
         let query = PFQuery(className: "Alerts")
+        query.addDescendingOrder("createdAt")
         query.findObjectsInBackground { (results, error) in
             if error == nil {
                 if results != nil {
@@ -67,21 +68,10 @@ class AlertViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.resolvedButton.addTarget(self, action: #selector(AlertViewController.dismissAlert(sender:)), for: .touchUpInside)
         
         if alerts[indexPath.row]["dismissed"] as? Bool == true {
-            if let grayBackground = cell.viewWithTag(999){
-                
-            }else{
-                print("fading view")
-                let grayView = UIView(frame: cell.frame)
-                grayView.tag = 999
-                cell.addSubview(grayView)
-                grayView.backgroundColor = UIColor(white: 0.2, alpha: 0.4)
-                grayView.alpha = 0.0
-                UIView.animate(withDuration: 0.8, animations: {
-                    grayView.alpha = 1.0
-                })
-            }
+            cell.coverView.alpha = 0.2
+        }else{
+            cell.coverView.alpha = 0.0
         }
-        
         return cell
     }
     
@@ -89,11 +79,14 @@ class AlertViewController: UIViewController, UITableViewDataSource, UITableViewD
         alerts[sender.tag]["dismissed"] = true
         alerts[sender.tag]["viewed"] = true
         alerts[sender.tag].saveInBackground()
-        self.tableView.reloadData()
+        UIView.animate(withDuration: 1.0) {
+            (self.tableView.cellForRow(at: IndexPath(row: sender.tag, section: 0)) as! AlertTableViewCell).coverView.alpha = 0.2
+        }
         
     }
     
     func sendPositiveResposne(sender:UIButton){
+        dismissAlert(sender: sender)
         let url = URL(string: "http://23.92.20.162:5000/positiveResponse/")
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             if error != nil {
@@ -104,6 +97,9 @@ class AlertViewController: UIViewController, UITableViewDataSource, UITableViewD
             print(result)
         }
         task.resume()
+    }
+    @IBAction func backClicked(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     /*

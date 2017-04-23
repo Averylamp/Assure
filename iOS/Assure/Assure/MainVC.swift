@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class MainVC: UIViewController {
 	
@@ -39,6 +40,11 @@ class MainVC: UIViewController {
 		setupBottomSection()
 		
 		runTimer()
+        resolvedButton.layer.borderWidth = 2
+        resolvedButton.layer.borderColor = UIColor.black.cgColor
+        self.alertViewTopConstraint.constant = -160
+        alertButton.addTarget(self, action: #selector(self.sendPositiveResponse(sender:)), for: .touchUpInside)
+        resolvedButton.addTarget(self, action: #selector(self.resolveCurrentAlert), for: .touchUpInside)
 	}
 	
 	
@@ -223,16 +229,107 @@ class MainVC: UIViewController {
 		
 		task.resume()
 	}
+    
 
 	func runTimer() {
 		let timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.grabModule), userInfo: nil, repeats: true)
 		timer.fire()
+        let timer2 = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(self.grabAlerts), userInfo: nil, repeats: true)
+        timer2.fire()
 	}
 	
 	func grabModule() {
 		getGeneralLocationInfo()
 	}
 	
+    var alertDisplaying = false
+    
+    func grabAlerts() {
+        let query = PFQuery(className: "Alerts")
+        query.whereKey("viewed", equalTo: false)
+        query.order(byDescending: "createdAt")
+        query.limit = 1
+        query.findObjectsInBackground { (results, error) in
+            if error != nil {
+                print("Error fetching alerts")
+            }else{
+                if results!.count > 0 && !self.alertDisplaying {
+                    self.alertDisplaying = true
+                    self.displayAlert(alert: results!.first!)
+                }
+            }
+        }
+    }
+    @IBOutlet weak var alertView: UIView!
+    
+    @IBOutlet weak var alertLabel: UILabel!
+    
+    @IBOutlet weak var alertButton: UIButton!
+    
+    @IBOutlet weak var resolvedButton: UIButton!
+    
+    @IBOutlet weak var alertViewTopConstraint: NSLayoutConstraint!
+    
+    var displayingAlert: PFObject?
+    func displayAlert(alert: PFObject){
+        self.view.bringSubview(toFront: self.alertView)
+        print("Displaying Alert")
+        alert.setValue(true, forKey: "viewed")
+        displayingAlert = alert
+        alertLabel.text = alert["alertMessage"] as? String
+        alertButton.setTitle(alert["positiveResponse"] as? String, for: .normal)
+        alert.saveInBackground()
+        self.alertView.layoutIfNeeded()
+        UIView.animate(withDuration: 1.5, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 20, options: .curveEaseOut, animations: {
+            self.alertViewTopConstraint.constant = 0
+            self.alertView.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    func dismissAlert(){
+        alertDisplaying = false
+        displayingAlert = nil
+        DispatchQueue.main.sync {
+            self.alertViewTopConstraint.constant = 0
+            self.alertView.layoutIfNeeded()
+            UIView.animate(withDuration: 1.0) {
+                self.alertViewTopConstraint.constant = -160
+                self.alertView.layoutIfNeeded()
+            }
+        }
+    }
+    
+    func resolveCurrentAlert(){
+        if let alert = displayingAlert{
+            alert.setValue(true, forKey: "dismissed")
+            alert.setValue(true, forKey: "viewed")
+            alert.saveInBackground()
+            DispatchQueue.global(qos: .background).async {
+                self.dismissAlert()
+            }
+            
+        }
+    }
+    
+    func sendPositiveResponse(sender:UIButton){
+        let url = URL(string: "http://23.92.20.162:5000/positiveResponse/")
+        let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+            if error != nil {
+                print("Is the server running? Well you better go catch it.")
+                return
+            }
+            let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            self.resolveCurrentAlert()
+            print(result)
+        }
+        task.resume()
+        
+    }
+    
+    @IBAction func viewAllAlertsClicked(_ sender: Any) {
+        let allAlertsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AllAlertVC")
+        self.navigationController?.pushViewController(allAlertsVC, animated: true)
+    }
 	func turnBedroomOn() {
 		bedroomIV.image = UIImage(named: "bedroomon.png")
 		bathroomIV.image = UIImage(named: "bathroomoff.png")
