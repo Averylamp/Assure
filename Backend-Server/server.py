@@ -4,7 +4,7 @@
 
 #import the main flask, and request (to handle post request parameters) 
 from flask import Flask, request
-import requests, json
+import requests, json, operator
 import numpy as np
 from datetime import datetime, timedelta
 from twilio.rest import Client
@@ -46,10 +46,10 @@ def withinSecondsFromNow(datestring, seconds):
 #Handle post requests from the root directory
 @app.route('/', methods=['POST'])
 def processIncomingPostData():
-	if request.values.get("from_mac") is None:
+	if request.values.get("from_mac") is None or request.values.get("rssi") is None:
 		print("invalid params")
 		return "No valid parameters"
-	devices = {'A0:20:A6:0F:26:15': '2', 'A0:20:A6:01:56:52': '4', 'A0:20:A6:0F:28:9B': '1', 'A0:20:A6:01:53:54': '3', 'A0:20:A6:0F:29:0F': '5'}
+	devices = {'A0:20:A6:0F:26:15': '2', 'A0:20:A6:01:56:52': '4', 'A0:20:A6:0F:28:9B': '1', 'A0:20:A6:01:53:54': '3', 'A0:20:A6:0F:29:0F': '5', 'A0:20:A6:01:56:B8':'6', 'A0:20:A6:04:62:4A':'7', 'A0:20:A6:07:14:F4':'8'}
 
 	data = {}
 	data["fromMAC"] =  request.values.get("from_mac")
@@ -66,7 +66,7 @@ def processIncomingPostData():
 	global last_values
 	if data["fromMAC"] in last_values:
 		mean = np.mean(last_values[data["fromMAC"]])
-		std = np.std(last_values[data["fromMAC"]]) + 5
+		std = np.std(last_values[data["fromMAC"]]) + 3
 		print("Mean - {}, Std -{}, Expected range - {}, {}".format(mean, std, mean - std, mean + std))
 		next_distance = float(data["distance"])
 		if abs(next_distance - mean) > std:
@@ -94,7 +94,6 @@ def getClosestModule():
 	parse_headers = {"X-Parse-Application-Id":"assure-parse-app","Content-Type":"application/json"}
 	r = requests.get("http://assure-parse.herokuapp.com/parse/config", headers=parse_headers)
 	config_results = r.json()["params"]
-
 	date_query = ""
 	# from_date = "%Y-%m-%dT%H:%M:%S.000Z"
 	if request.values.get("from_date") is None:
@@ -154,18 +153,23 @@ def getClosestModule():
 	min_distance = 10000
 	min_mac = ""
 	min_module = 0
-
-	for item in distances.items():
-		if item[1] < min_distance:
-			min_distance = item[1]
-			min_mac = item[0]
-			min_module = config_results[min_mac.replace(":", "")]
-
-	if min_distance == 1000:
+	sorted_dist = sorted(distances.items(), key=operator.itemgetter(1))
+	distances = []
+	for i in sorted_dist:
+		distances.append((config_results[i[0].replace(":","")], i[1]))
+	#for item in distances.items():
+	#	if item[1] < min_distance:
+#			min_distance = item[1]
+#			min_mac = item[0]
+#			min_module = config_results[min_mac.replace(":", "")]
+	if distances[0][1] == 1000:
+#	if min_distance == 1000:
 		print("No closest module")
 		return "No closest module"
-	print("Closest Module - {}, Distance - {},     MAC - {}".format(min_module, min_distance, min_mac))
-	return "Closest Module - {}, Distance - {},     MAC - {}".format(min_module, min_distance, min_mac)
+#	print("Closest Module - {}, Distance - {},     MAC - {}".format(min_module, min_distance, min_mac))
+	print("\n".join(", distance - ".join(map(str,sl)) for sl in distances))
+	return ",".join(",".join(map(str,sl)) for sl in distances)
+
 
 @app.route('/sendText/', methods=['GET','POST'])
 def send_message():
@@ -199,4 +203,4 @@ def getLocation():
 
 # run the app!
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', threaded=True)
