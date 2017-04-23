@@ -10,8 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var passwordField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        passwordField.addTarget(passwordField, action: #selector(passwordField.resignFirstResponder), for: .editingDidEndOnExit)
         // Do any additional setup after loading the view, typically from a nib.
     }
 
