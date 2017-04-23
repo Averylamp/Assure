@@ -18,7 +18,7 @@ class MainVC: UIViewController {
 		
 		//Graph View
 		let graphViewFrame = CGRect(x: 0, y: 20, width: view.frame.width, height: 300)
-		let graphView = GrandpaGraph(frame: graphViewFrame)
+		graphView = GrandpaGraph(frame: graphViewFrame)
 		graphView.backgroundColor = .red //to be commented out after debugging
 		view.addSubview(graphView)
 
@@ -44,10 +44,15 @@ class MainVC: UIViewController {
 		
 	}
 	
-	override func viewDidAppear(_ animated: Bool) {
-		print("doing it")
-		graphView.setGraphValues(v1: 60, v2: 120, v3: 15, v4: 240)
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		self.graphView.setGraphValues(v1: 60.0, v2: 15.0, v3: 30.0, v4: 40.0)
 	}
+	
+//	override func viewDidAppear(_ animated: Bool) {
+//		super.viewDidAppear(animated)
+//		print("doing it")
+//		graphView.setGraphValues(v1: 60.0, v2: 120.0, v3: 15.0, v4: 240.0)
+//	}
 	
 	func getGrandpaLocationStatus() {
 		let gLocation = ""

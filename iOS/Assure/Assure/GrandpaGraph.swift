@@ -12,10 +12,10 @@ class GrandpaGraph: UIView {
 
 	let timeTitle = UILabel()
 	
-	var graphBar1 = UIView()
-	var graphBar2 = UIView()
-	var graphBar3 = UIView()
-	var graphBar4 = UIView()
+	let graphBar1 = UIView()
+	let graphBar2 = UIView()
+	let graphBar3 = UIView()
+	let graphBar4 = UIView()
 	var xAxis = UIView()
 
 	override init(frame: CGRect) {
@@ -74,21 +74,23 @@ class GrandpaGraph: UIView {
 		
 		//bars
 		
-		graphBar1 = UIView(frame: CGRect(x: 57, y: xAxis.frame.minY-100, width: 65, height: 100))
-		graphBar1.backgroundColor = UIColor(colorLiteralRed: 114/255.0, green: 160/255.0, blue: 235/255.0, alpha: 1)
-		self.addSubview(graphBar1)
+		self.graphBar1.frame = CGRect(x: 57, y: xAxis.frame.minY-100, width: 65, height: 100)
+		self.graphBar1.backgroundColor = UIColor(colorLiteralRed: 114/255.0, green: 160/255.0, blue: 235/255.0, alpha: 1)
+		self.addSubview(self.graphBar1)
 		
-		graphBar2 = UIView(frame: CGRect(x: 133, y: xAxis.frame.minY-100, width: 65, height: 100))
-		graphBar2.backgroundColor = UIColor(colorLiteralRed: 104/255.0, green: 209/255.0, blue: 184/255.0, alpha: 1)
-		self.addSubview(graphBar2)
+		self.graphBar2.frame = CGRect(x: 133, y: xAxis.frame.minY-100, width: 65, height: 100)
+		self.graphBar2.backgroundColor = UIColor(colorLiteralRed: 104/255.0, green: 209/255.0, blue: 184/255.0, alpha: 1)
+		self.addSubview(self.graphBar2)
 		
-		graphBar3 = UIView(frame: CGRect(x: 208, y: xAxis.frame.minY-100, width: 65, height: 100))
-		graphBar3.backgroundColor = UIColor(colorLiteralRed: 245/255.0, green: 166/255.0, blue: 35/255.0, alpha: 1)
-		self.addSubview(graphBar3)
+		self.graphBar3.frame = CGRect(x: 208, y: xAxis.frame.minY-100, width: 65, height: 100)
+		self.graphBar3.backgroundColor = UIColor(colorLiteralRed: 245/255.0, green: 166/255.0, blue: 35/255.0, alpha: 1)
+		self.addSubview(self.graphBar3)
+	
+		//self.setGraphValues(v1: 60.0, v2: 15.0, v3: 30.0, v4: 40.0)
 		
-		graphBar4 = UIView(frame: CGRect(x: 283, y: xAxis.frame.minY-100, width: 65, height: 100))
-		graphBar4.backgroundColor = UIColor(colorLiteralRed: 255/255.0, green: 140/255.0, blue: 154/255.0, alpha: 1)
-		self.addSubview(graphBar4)
+		self.graphBar4.frame = CGRect(x: 283, y: xAxis.frame.minY-100, width: 65, height: 100)
+		self.graphBar4.backgroundColor = UIColor(colorLiteralRed: 255/255.0, green: 140/255.0, blue: 154/255.0, alpha: 1)
+		self.addSubview(self.graphBar4)
 		
 	}
 	
@@ -104,17 +106,20 @@ class GrandpaGraph: UIView {
 		let h2 = v2/maxTime * maxHeight
 		let h3 = v3/maxTime * maxHeight
 		let h4 = v4/maxTime * maxHeight
+		print(graphBar1.frame)
 		
-		UIView.animate(withDuration: 2.5, delay: 0.4,
-		               options: [.repeat, .autoreverse, .curveEaseOut],
+		
+		UIView.animate(withDuration: 0.5, delay: 0.4,
+		               options: [.curveEaseInOut],
 		               animations: {
+						
 						self.graphBar1.frame = CGRect(x: 57, y: bottom-h1, width: 65, height: h1)
 						self.graphBar2.frame = CGRect(x: 133, y: bottom-h2, width: 65, height: h2)
 						self.graphBar3.frame = CGRect(x: 208, y: bottom-h3, width: 65, height: h3)
 						self.graphBar4.frame = CGRect(x: 283, y: bottom-h4, width: 65, height: h4)
+						print(self.graphBar1.frame)
 						print("doing it")
 				}, completion: nil)
-		
 		
 		
 	}
