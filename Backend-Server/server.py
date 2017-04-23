@@ -89,7 +89,7 @@ def processIncomingGetData():
 	print "GET REQUEST"
 	return "GET Requests Currently Do Not Serve A Purpose"
 
-@app.route('/closestModule', methods=['GET'])
+@app.route('/closestModule/', methods=['GET'])
 def getClosestModule():
 	parse_headers = {"X-Parse-Application-Id":"assure-parse-app","Content-Type":"application/json"}
 	r = requests.get("http://assure-parse.herokuapp.com/parse/config", headers=parse_headers)
