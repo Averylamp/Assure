@@ -213,6 +213,24 @@ def fallOccured():
 
 	return "Oh no!"
 
+@app.route('/lifeAlert/', methods=['GET', 'POST'])
+def lifeAlertOccured():
+	print("A FALL HAS OCCURED.")
+	if request.values.get("message") is None:
+		return "No message sent"
+	else:
+		text = request.values.get("message")
+		send_message(text)
+		data = {}
+		data["dismissed"] = False
+		data["viewed"] = False
+		data["personName"] = "Grandpa"
+		data["alertMessage"] = text
+		data["positiveResponse"] = "On my way!"
+		sendDictionaryToParse(data, "Alerts")
+
+	return "Oh no!"
+
 @app.route('/getResponse/', methods=['GET'])
 def currentlyResponding():
 	return "no response"
