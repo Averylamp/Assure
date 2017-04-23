@@ -20,7 +20,7 @@ class MainVC: UIViewController {
 		//Graph View
 		let graphViewFrame = CGRect(x: 0, y: 20, width: view.frame.width, height: 300)
 		graphView = GrandpaGraph(frame: graphViewFrame)
-		graphView.backgroundColor = .red //to be commented out after debugging
+//		graphView.backgroundColor = .red //to be commented out after debugging
 		view.addSubview(graphView)
 
 		
