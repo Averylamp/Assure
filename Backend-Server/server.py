@@ -187,13 +187,13 @@ def send_message(text):
 	print("Send text initiated")
 	if request.values.get("message") is None:
 		return "No message sent"
-	else:
+	elif text is None:
 		text = request.values.get("message")
 	account_sid = "AC8297f68c93c5374aec9089e8fabfc089"
 	auth_token = "118545b140865a4db481070ed8092699"
 	client = Client(account_sid, auth_token)
 
-	numbers = ["+19202860426"]
+	numbers = ["+19202860426", "+19738738225"]
 	# numbers = ["+19738738225","+19202860426","+16268727820","+13233948643","+13153833921"]
 	for i in numbers:
 		message = client.api.account.messages.create(to=i,from_="+16265514837",body=text)
@@ -209,7 +209,6 @@ def fallOccured():
 		return "No message sent"
 	else:
 		text = request.values.get("message")
-		send_message(text)
 		locations = {"2":"Bathroom","4":"Bedroom", "5":"Kitchen", "6":"Living Room"}
 		data = {}
 		data["dismissed"] = False
@@ -218,9 +217,10 @@ def fallOccured():
 		location = ""
 		last_module = getClosestModule()[0]
 		if last_module in locations:
-			locations += " in the " + locations[last_module]
-		data["alertMessage"] = "A fall was just detected" + ".  Grandpa may need help."
+			location += " in the " + locations[last_module]
+		data["alertMessage"] = "A fall was just detected" + location + ".  Grandpa may need help."
 		data["positiveResponse"] = "On my way!"
+		send_message(data["alertMessage"])
 		sendDictionaryToParse(data, "Alerts")
 
 	return "Oh no!"
@@ -233,7 +233,6 @@ def lifeAlertOccured():
 	else:
 		locations = {"2":"Bathroom","4":"Bedroom", "5":"Kitchen", "6":"Living Room"}
 		text = request.values.get("message")
-		send_message(text)
 		data = {}
 		data["dismissed"] = False
 		data["viewed"] = False
@@ -241,8 +240,9 @@ def lifeAlertOccured():
 		location = ""
 		last_module = getClosestModule()[0]
 		if last_module in locations:
-			locations += "  He is in the " + locations[last_module]
-		data["alertMessage"] = "Grandpa just pushed the life alert button." + locations
+			location += "  He is in the " + locations[last_module]
+		data["alertMessage"] = "Grandpa just pushed the life alert button." + location
+		send_message(data["alertMessage"])
 		data["positiveResponse"] = "On my way!"
 		sendDictionaryToParse(data, "Alerts")
 	return "Oh no!"
