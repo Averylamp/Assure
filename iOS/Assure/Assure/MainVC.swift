@@ -15,6 +15,15 @@ class MainVC: UIViewController {
 	var graphView = GrandpaGraph()
 	let leftBar = UIView()
 	let rightBar = UIView()
+	
+	//cvs
+	let cv1 = UIView()
+	let cv2 = UIView()
+	let cv3 = UIView()
+	let cv4 = UIView()
+	let cv5 = UIView()
+	let cv6 = UIView()
+	let cv7 = UIView()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -56,41 +65,40 @@ class MainVC: UIViewController {
 		let orange = UIColor(colorLiteralRed: 245/255.0, green: 166/255.0, blue: 35/255.0, alpha: 1)
 		let pink = UIColor(colorLiteralRed: 255/255.0, green: 140/255.0, blue: 154/255.0, alpha: 1)
 		
-		let cv1 = UIView()
+		
 		cv1.backgroundColor = green
 		cv1.frame = CGRect(x: Double(leftBar.frame.maxX), y: cvY, width: Double(totalBarD*0.3), height: cvHeight )
 		view.addSubview(cv1)
 		
-		let cv2 = UIView()
+		
 		cv2.backgroundColor = blue
 		cv2.frame = CGRect(x: Double(cv1.frame.maxX), y: cvY, width: Double(totalBarD*0.10), height: cvHeight )
 		view.addSubview(cv2)
 		
-		let cv3 = UIView()
+		
 		cv3.backgroundColor = orange
 		cv3.frame = CGRect(x: Double(cv2.frame.maxX), y: cvY, width: Double(totalBarD*0.15), height: cvHeight )
 		view.addSubview(cv3)
 		
-		let cv4 = UIView()
+		
 		cv4.backgroundColor = blue
 		cv4.frame = CGRect(x: Double(cv3.frame.maxX), y: cvY, width: Double(totalBarD*0.15), height: cvHeight )
 		view.addSubview(cv4)
 		
-		let cv5 = UIView()
+		
 		cv5.backgroundColor = pink
 		cv5.frame = CGRect(x: Double(cv4.frame.maxX), y: cvY, width: Double(totalBarD*0.05), height: cvHeight )
 		view.addSubview(cv5)
 		
-		let cv6 = UIView()
+		
 		cv6.backgroundColor = blue
 		cv6.frame = CGRect(x: Double(cv5.frame.maxX), y: cvY, width: Double(totalBarD*0.05), height: cvHeight )
 		view.addSubview(cv6)
 		
-		let cv7 = UIView()
+		
 		cv7.backgroundColor = green
 		cv7.frame = CGRect(x: Double(cv6.frame.maxX), y: cvY, width: Double(totalBarD*0.2), height: cvHeight )
 		view.addSubview(cv7)
-		
 		
 		let box = UIView()
 		box.frame = CGRect(x: rightBar.frame.minX-30, y: leftBar.frame.midY-15, width: 30, height: 30)
@@ -104,10 +112,7 @@ class MainVC: UIViewController {
 		box.addGestureRecognizer(pan)
 	}
 	
-//	func panBox(_ send:UIPanGestureRecognizer) {
-//		print("working")
-//	}
-	
+	//handles the pan of the moving of the slider box
 	func handlePan(recognizer:UIPanGestureRecognizer) {
 		let translation = recognizer.translation(in: self.view)
 		if let view = recognizer.view {
@@ -116,10 +121,30 @@ class MainVC: UIViewController {
 													//It's 10+4. 10 from half width, 4 from bar
 			newX = min(newX, rightBar.frame.minX-14)
 			view.center = CGPoint(x:newX, y: view.center.y)
+			
+			if (newX < cv1.frame.maxX) {
+				graphView.setGraphValues(v1: 5, v2: 45, v3: 5, v4: 5)
+			} else if (newX < cv2.frame.maxX) {
+				graphView.setGraphValues(v1: 35, v2: 10, v3: 5, v4: 10)
+			} else if (newX < cv3.frame.maxX) {
+				graphView.setGraphValues(v1: 16, v2: 3, v3: 37, v4: 4)
+			} else if (newX < cv4.frame.maxX) {
+				graphView.setGraphValues(v1: 35, v2: 8, v3: 11, v4: 6)
+			} else if (newX < cv5.frame.maxX) {
+				graphView.setGraphValues(v1: 10, v2: 14, v3: 5, v4: 31)
+			} else if (newX < cv6.frame.maxX) {
+				graphView.setGraphValues(v1: 35, v2: 23, v3: 1, v4: 1)
+			} else {
+				graphView.setGraphValues(v1: 5, v2: 45, v3: 5, v4: 5)
+			}
+			
+			
 		}
 		recognizer.setTranslation(CGPoint.zero, in: self.view)
 	}
 	
+	
+	//sets up the bottom area of the main view
 	func setupBottomSection() {
 		//Bottom View
 		let bottomView = UIView()
@@ -144,11 +169,9 @@ class MainVC: UIViewController {
 		self.graphView.setGraphValues(v1: 30.0, v2: 5.0, v3: 10.0, v4: 15.0)
 	}
 	
-	//
 	func getGeneralLocationInfo() {
 		
 		let url = URL(string: "http://23.92.20.162:5000/closestModule/")
-		
 		let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
 			if error != nil {
 				print("Is the server running? Well you better go catch it.")
@@ -159,8 +182,6 @@ class MainVC: UIViewController {
 		}
 		
 		task.resume()
-		
-		
 	}
 
 	func getAndSetGrandpaLocationStatus() {
