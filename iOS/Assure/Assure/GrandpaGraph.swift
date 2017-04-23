@@ -117,10 +117,7 @@ class GrandpaGraph: UIView {
 						self.graphBar3.frame = CGRect(x: 208, y: bottom-h3, width: 65, height: h3)
 						self.graphBar4.frame = CGRect(x: 283, y: bottom-h4, width: 65, height: h4)
 						print(self.graphBar1.frame)
-						print("doing it")
 				}, completion: nil)
-		
-		
 	}
 	
 	required init?(coder aDecoder: NSCoder) {

@@ -11,6 +11,7 @@
 		3838E3F7B1EA27A2C7977B79 /* Pods_Assure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E88CFF3B51ADB2D372A397 /* Pods_Assure.framework */; };
 		B984323E1EAC2DE100BF3B8F /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984323D1EAC2DE100BF3B8F /* MainVC.swift */; };
 		B98432401EAC421B00BF3B8F /* GrandpaGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984323F1EAC421B00BF3B8F /* GrandpaGraph.swift */; };
+		B98432421EACBFE300BF3B8F /* bedroomon.png in Resources */ = {isa = PBXBuildFile; fileRef = B98432411EACBFE300BF3B8F /* bedroomon.png */; };
 		BB1C954D1EAC674D0068E71C /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C954C1EAC674D0068E71C /* AlertViewController.swift */; };
 		BB1C954F1EAC67630068E71C /* AlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C954E1EAC67630068E71C /* AlertTableViewCell.swift */; };
 		BBC667FA1EABEBA100555263 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC667F91EABEBA100555263 /* AppDelegate.swift */; };
@@ -50,6 +51,7 @@
 		B866494B0613993A9FA2906E /* Pods_AssureUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AssureUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B984323D1EAC2DE100BF3B8F /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		B984323F1EAC421B00BF3B8F /* GrandpaGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrandpaGraph.swift; sourceTree = "<group>"; };
+		B98432411EACBFE300BF3B8F /* bedroomon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bedroomon.png; sourceTree = "<group>"; };
 		BB1C954C1EAC674D0068E71C /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		BB1C954E1EAC67630068E71C /* AlertTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertTableViewCell.swift; sourceTree = "<group>"; };
 		BBC667F61EABEBA100555263 /* Assure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assure.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,7 @@
 				BBC667FD1EABEBA100555263 /* Main.storyboard */,
 				BB1C954C1EAC674D0068E71C /* AlertViewController.swift */,
 				BB1C954E1EAC67630068E71C /* AlertTableViewCell.swift */,
+				B98432411EACBFE300BF3B8F /* bedroomon.png */,
 				BBC668001EABEBA100555263 /* Assets.xcassets */,
 				BBC668021EABEBA100555263 /* LaunchScreen.storyboard */,
 				BBC668051EABEBA100555263 /* Info.plist */,
@@ -297,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBC668041EABEBA100555263 /* LaunchScreen.storyboard in Resources */,
+				B98432421EACBFE300BF3B8F /* bedroomon.png in Resources */,
 				BBC668011EABEBA100555263 /* Assets.xcassets in Resources */,
 				BBC667FF1EABEBA100555263 /* Main.storyboard in Resources */,
 			);
