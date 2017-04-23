@@ -91,6 +91,12 @@ def processIncomingGetData():
 	print "GET REQUEST"
 	return "GET Requests Currently Do Not Serve A Purpose"
 
+@app.route('/closestTeensy/', methods=['GET'])
+def getClosestTeensy():
+	closest_module = getClosestModule()
+	print("<html>" + closest_module[0] + "</html>")
+	return "<html>" + closest_module[0] + "</html>"
+
 @app.route('/closestModule/', methods=['GET'])
 def getClosestModule():
 	parse_headers = {"X-Parse-Application-Id":"assure-parse-app","Content-Type":"application/json"}
@@ -185,7 +191,8 @@ def send_message(text):
 	auth_token = "118545b140865a4db481070ed8092699"
 	client = Client(account_sid, auth_token)
 
-	numbers = ["+19738738225","+19202860426","+16268727820","+13233948643","+13153833921"]
+	numbers = ["+19202860426"]
+	# numbers = ["+19738738225","+19202860426","+16268727820","+13233948643","+13153833921"]
 	for i in numbers:
 		message = client.api.account.messages.create(to=i,from_="+16265514837",body=text)
 		print(message.sid)
@@ -201,11 +208,16 @@ def fallOccured():
 	else:
 		text = request.values.get("message")
 		send_message(text)
+		locations = {"2":"Bathroom","4":"Bedroom", "5":"Kitchen", "6":"Living Room"}
 		data = {}
 		data["dismissed"] = False
 		data["viewed"] = False
 		data["personName"] = "Grandpa"
-		data["alertMessage"] = text
+		location = ""
+		last_module = getClosestModule()[0]
+		if last_module in locations:
+			locations += " in the " + locations[last_module]
+		data["alertMessage"] = "A fall was just detected" + ".  Grandpa may need help."
 		data["positiveResponse"] = "On my way!"
 		sendDictionaryToParse(data, "Alerts")
 
@@ -217,16 +229,20 @@ def lifeAlertOccured():
 	if request.values.get("message") is None:
 		return "No message sent"
 	else:
+		locations = {"2":"Bathroom","4":"Bedroom", "5":"Kitchen", "6":"Living Room"}
 		text = request.values.get("message")
 		send_message(text)
 		data = {}
 		data["dismissed"] = False
 		data["viewed"] = False
 		data["personName"] = "Grandpa"
-		data["alertMessage"] = text
+		location = ""
+		last_module = getClosestModule()[0]
+		if last_module in locations:
+			locations += "  He is in the " + locations[last_module]
+		data["alertMessage"] = "Grandpa just pushed the life alert button." + locations
 		data["positiveResponse"] = "On my way!"
 		sendDictionaryToParse(data, "Alerts")
-
 	return "Oh no!"
 
 @app.route('/getResponse/', methods=['GET'])
