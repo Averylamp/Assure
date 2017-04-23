@@ -141,6 +141,8 @@ def getClosestModule():
 		print(parse_results[0]["createdAt"])
 		mid = 1.0 / len(parse_results)
 		median = float(len(parse_results) / 2)
+		if median == 0 :
+			median = 1
 		distance = 0
 		# print(parse_config_resultss)
 		for i in range(len(parse_results)):
