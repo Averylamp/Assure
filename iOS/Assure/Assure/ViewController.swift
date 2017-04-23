@@ -28,6 +28,6 @@ class ViewController: UIViewController {
 extension UILabel{
 	var defaultFont: UIFont? {
 		get { return self.font }
-		set { self.font = UIFont (name: "Avenir", size: 16) }
+		set { self.font = UIFont (name: "Avenir-Book", size: 16) }
 	}
 }
