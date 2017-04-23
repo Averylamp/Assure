@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B984323E1EAC2DE100BF3B8F /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984323D1EAC2DE100BF3B8F /* MainVC.swift */; };
+		B98432401EAC421B00BF3B8F /* GrandpaGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984323F1EAC421B00BF3B8F /* GrandpaGraph.swift */; };
 		BBC667FA1EABEBA100555263 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC667F91EABEBA100555263 /* AppDelegate.swift */; };
 		BBC667FC1EABEBA100555263 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC667FB1EABEBA100555263 /* ViewController.swift */; };
 		BBC667FF1EABEBA100555263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC667FD1EABEBA100555263 /* Main.storyboard */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B984323D1EAC2DE100BF3B8F /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		B984323F1EAC421B00BF3B8F /* GrandpaGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrandpaGraph.swift; sourceTree = "<group>"; };
 		BBC667F61EABEBA100555263 /* Assure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assure.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC667F91EABEBA100555263 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC667FB1EABEBA100555263 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +103,8 @@
 			children = (
 				BBC667F91EABEBA100555263 /* AppDelegate.swift */,
 				BBC667FB1EABEBA100555263 /* ViewController.swift */,
+				B984323D1EAC2DE100BF3B8F /* MainVC.swift */,
+				B984323F1EAC421B00BF3B8F /* GrandpaGraph.swift */,
 				BBC667FD1EABEBA100555263 /* Main.storyboard */,
 				BBC668001EABEBA100555263 /* Assets.xcassets */,
 				BBC668021EABEBA100555263 /* LaunchScreen.storyboard */,
@@ -262,7 +268,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B98432401EAC421B00BF3B8F /* GrandpaGraph.swift in Sources */,
 				BBC667FC1EABEBA100555263 /* ViewController.swift in Sources */,
+				B984323E1EAC2DE100BF3B8F /* MainVC.swift in Sources */,
 				BBC667FA1EABEBA100555263 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,6 +522,7 @@
 				BBC668201EABEBA100555263 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BBC668211EABEBA100555263 /* Build configuration list for PBXNativeTarget "AssureTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +531,7 @@
 				BBC668231EABEBA100555263 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BBC668241EABEBA100555263 /* Build configuration list for PBXNativeTarget "AssureUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +540,7 @@
 				BBC668261EABEBA100555263 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
