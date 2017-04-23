@@ -11,6 +11,7 @@ import UIKit
 class MainVC: UIViewController {
 	
 	let grandpaStatusLabel = UILabel()
+	var graphView = GrandpaGraph()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -41,6 +42,11 @@ class MainVC: UIViewController {
 		
 		
 		
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		print("doing it")
+		graphView.setGraphValues(v1: 60, v2: 120, v3: 15, v4: 240)
 	}
 	
 	func getGrandpaLocationStatus() {

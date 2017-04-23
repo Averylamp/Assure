@@ -12,6 +12,12 @@ class GrandpaGraph: UIView {
 
 	let timeTitle = UILabel()
 	
+	var graphBar1 = UIView()
+	var graphBar2 = UIView()
+	var graphBar3 = UIView()
+	var graphBar4 = UIView()
+	var xAxis = UIView()
+
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 		
@@ -34,7 +40,7 @@ class GrandpaGraph: UIView {
 		yAxis.backgroundColor = .black
 		self.addSubview(yAxis)
 		
-		let xAxis = UIView(frame: CGRect(x: 44, y: yAxis.frame.maxY, width: 316, height: 4))
+		xAxis = UIView(frame: CGRect(x: 44, y: yAxis.frame.maxY, width: 316, height: 4))
 		xAxis.backgroundColor = .black
 		self.addSubview(xAxis)
 		
@@ -68,28 +74,54 @@ class GrandpaGraph: UIView {
 		
 		//bars
 		
-		let graphBar1 = UIView(frame: CGRect(x: 57, y: xAxis.frame.minY-100, width: 65, height: 100))
+		graphBar1 = UIView(frame: CGRect(x: 57, y: xAxis.frame.minY-100, width: 65, height: 100))
 		graphBar1.backgroundColor = UIColor(colorLiteralRed: 114/255.0, green: 160/255.0, blue: 235/255.0, alpha: 1)
 		self.addSubview(graphBar1)
 		
-		let graphBar2 = UIView(frame: CGRect(x: 133, y: xAxis.frame.minY-100, width: 65, height: 100))
+		graphBar2 = UIView(frame: CGRect(x: 133, y: xAxis.frame.minY-100, width: 65, height: 100))
 		graphBar2.backgroundColor = UIColor(colorLiteralRed: 104/255.0, green: 209/255.0, blue: 184/255.0, alpha: 1)
 		self.addSubview(graphBar2)
 		
-		let graphBar3 = UIView(frame: CGRect(x: 208, y: xAxis.frame.minY-100, width: 65, height: 100))
+		graphBar3 = UIView(frame: CGRect(x: 208, y: xAxis.frame.minY-100, width: 65, height: 100))
 		graphBar3.backgroundColor = UIColor(colorLiteralRed: 245/255.0, green: 166/255.0, blue: 35/255.0, alpha: 1)
 		self.addSubview(graphBar3)
 		
-		let graphBar4 = UIView(frame: CGRect(x: 283, y: xAxis.frame.minY-100, width: 65, height: 100))
+		graphBar4 = UIView(frame: CGRect(x: 283, y: xAxis.frame.minY-100, width: 65, height: 100))
 		graphBar4.backgroundColor = UIColor(colorLiteralRed: 255/255.0, green: 140/255.0, blue: 154/255.0, alpha: 1)
 		self.addSubview(graphBar4)
+		
+	}
+	
+	//Inputs Here Should Be in Minutes. Maximum of 60
+	public func setGraphValues(v1: Double, v2: Double, v3: Double, v4: Double) {
+		
+		let bottom = Double(xAxis.frame.minY)
+		let maxHeight = 155.0
+		let maxTime = 60.0
+		
+		//calculating heights of the bar
+		let h1 = v1/maxTime * maxHeight
+		let h2 = v2/maxTime * maxHeight
+		let h3 = v3/maxTime * maxHeight
+		let h4 = v4/maxTime * maxHeight
+		
+		UIView.animate(withDuration: 2.5, delay: 0.4,
+		               options: [.repeat, .autoreverse, .curveEaseOut],
+		               animations: {
+						self.graphBar1.frame = CGRect(x: 57, y: bottom-h1, width: 65, height: h1)
+						self.graphBar2.frame = CGRect(x: 133, y: bottom-h2, width: 65, height: h2)
+						self.graphBar3.frame = CGRect(x: 208, y: bottom-h3, width: 65, height: h3)
+						self.graphBar4.frame = CGRect(x: 283, y: bottom-h4, width: 65, height: h4)
+						print("doing it")
+				}, completion: nil)
+		
 		
 		
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		print("please don't use this")
-		fatalError("init(coder:) has not been implemented")
+		super.init(frame: CGRect.zero)
+		//nothing to see here!
 	}
 
 }
