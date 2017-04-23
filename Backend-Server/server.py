@@ -190,6 +190,12 @@ def send_message():
 @app.route('/fall/', methods=['GET', 'POST'])
 def fallOccured():
 	print("A FALL HAS OCCURED.")
+	return "Oh no!"
+
+@app.route('/get-location/', methods=['GET', 'POST'])
+def getLocation():
+	print("An app is requesting location")
+	return "Here's the location: kitchen"
 
 # run the app!
 if __name__ == "__main__":
