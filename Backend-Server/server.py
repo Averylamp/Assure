@@ -66,7 +66,9 @@ def processIncomingPostData():
 	global last_values
 	if data["fromMAC"] in last_values:
 		mean = np.mean(last_values[data["fromMAC"]])
-		std = np.std(last_values[data["fromMAC"]]) + 3
+		std = np.std(last_values[data["fromMAC"]]) + 10
+		scale = max(1, mean / 20)
+		std = std * scale
 		print("Mean - {}, Std -{}, Expected range - {}, {}".format(mean, std, mean - std, mean + std))
 		next_distance = float(data["distance"])
 		if abs(next_distance - mean) > std:
@@ -120,7 +122,7 @@ def getClosestModule():
 	distances = {}
 	for mac in config_results.keys():
 		mac_address = stringToMAC(mac)
-		params = {"where":json.dumps({"fromMAC":mac_address,"createdAt":{"$lte":{"__type":"Date","iso":date_query}}}), "limit": 25, "order":"-createdAt"}
+		params = {"where":json.dumps({"fromMAC":mac_address,"createdAt":{"$lte":{"__type":"Date","iso":date_query}}}), "limit": 5, "order":"-createdAt"}
 		r = requests.get("http://assure-parse.herokuapp.com/parse/classes/ProbeRequests", headers=parse_headers, params= params)
 		# print(r.text)
 		parse_results = r.json()["results"]

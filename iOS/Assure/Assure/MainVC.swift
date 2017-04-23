@@ -10,6 +10,7 @@ import UIKit
 
 class MainVC: UIViewController {
 	
+	//class vars, which are called from multiple functions
 	let grandpaStatusLabel = UILabel()
 	var graphView = GrandpaGraph()
 
@@ -22,6 +23,10 @@ class MainVC: UIViewController {
 		graphView.backgroundColor = .red //to be commented out after debugging
 		view.addSubview(graphView)
 
+		
+		//Middle Area
+		
+		
 		
 		//Bottom View
 		let bottomView = UIView()
@@ -38,21 +43,23 @@ class MainVC: UIViewController {
 		grandpaStatusLabel.textAlignment = NSTextAlignment.center
 		view.addSubview(grandpaStatusLabel)
 		
+		
+		
+		
+		
+		
 		getAndSetGrandpaLocationStatus()
 		
-		
-		
+
 	}
 	
-	//this occurs on ecah touch
+	//this occurs on ecah touch, mostly used for debugging & testing
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		self.getGeneralLocationInfo()
 		//self.graphView.setGraphValues(v1: 60.0, v2: 15.0, v3: 30.0, v4: 40.0)
 	}
 	
-	
-	
-	
+	//
 	func getGeneralLocationInfo() {
 		
 		let url = URL(string: "http://23.92.20.162:5000/closestModule/")
@@ -90,5 +97,7 @@ class MainVC: UIViewController {
 		
 		grandpaStatusLabel.text = "Grandpa is currenty in the \(gLocation)"
 	}
+	
+	
 
 }
