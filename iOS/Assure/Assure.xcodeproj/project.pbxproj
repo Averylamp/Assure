@@ -286,7 +286,7 @@
 				TargetAttributes = {
 					BBC667F51EABEBA100555263 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = R4DQ2L3FBV;
+						DevelopmentTeam = F29E8CU7JT;
 						ProvisioningStyle = Automatic;
 					};
 					BBC668091EABEBA100555263 = {
@@ -659,7 +659,7 @@
 			baseConfigurationReference = 37FA343820FD2DB49E2F08C5 /* Pods-Assure.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = R4DQ2L3FBV;
+				DEVELOPMENT_TEAM = F29E8CU7JT;
 				INFOPLIST_FILE = Assure/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Isometric.Assure;
@@ -673,7 +673,7 @@
 			baseConfigurationReference = BEF9469452FF99308C24791B /* Pods-Assure.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = R4DQ2L3FBV;
+				DEVELOPMENT_TEAM = F29E8CU7JT;
 				INFOPLIST_FILE = Assure/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Isometric.Assure;
