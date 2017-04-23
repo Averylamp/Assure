@@ -24,6 +24,11 @@ class MainVC: UIViewController {
 	let cv5 = UIView()
 	let cv6 = UIView()
 	let cv7 = UIView()
+	
+	let bedroomIV = UIImageView()
+	let bathroomIV = UIImageView()
+	let livingIV = UIImageView()
+	let kitchenIV = UIImageView()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -31,7 +36,9 @@ class MainVC: UIViewController {
 		//Set up all main views
 		setupGraphView()
 		setupMiddleSection()
-		setupBottomSection()
+		//setupBottomSection()
+		
+		runTimer()
 	}
 	
 	
@@ -47,12 +54,12 @@ class MainVC: UIViewController {
 		//Middle Area
 		
 		//left slider bar
-		leftBar.frame = CGRect(x: 27, y: graphView.frame.maxY + 96, width: 4, height: 25)
+		leftBar.frame = CGRect(x: 27, y: graphView.frame.maxY, width: 4, height: 25)
 		leftBar.backgroundColor = .black
 		view.addSubview(leftBar)
 		
 		//right slider bar
-		rightBar.frame = CGRect(x: view.frame.width - 27, y: graphView.frame.maxY + 96, width: 4, height: 25)
+		rightBar.frame = CGRect(x: view.frame.width - 27, y: graphView.frame.maxY , width: 4, height: 25)
 		rightBar.backgroundColor = .black
 		view.addSubview(rightBar)
 		
@@ -165,7 +172,6 @@ class MainVC: UIViewController {
 	
 	//this occurs on ecah touch, mostly used for debugging & testing
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		//self.getGeneralLocationInfo()
 		self.graphView.setGraphValues(v1: 30.0, v2: 5.0, v3: 10.0, v4: 15.0)
 	}
 	
@@ -201,9 +207,15 @@ class MainVC: UIViewController {
 		
 		task.resume()
 		
-		grandpaStatusLabel.text = "Grandpa is currenty in the \(gLocation)"
+		//grandpaStatusLabel.text = "Grandpa is currenty in the \(gLocation)"
 	}
 	
+	func runTimer() {
+		var timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.grabModule), userInfo: nil, repeats: true)
+		timer.fire()
+	}
 	
-
+	func grabModule() {
+		getGeneralLocationInfo()
+	}
 }
