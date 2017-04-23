@@ -116,6 +116,25 @@ class MainVC: UIViewController {
 		
 		let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(recognizer:)))
 		box.addGestureRecognizer(pan)
+		
+		//adding labels below slider
+		
+		let yAL = Double(leftBar.frame.maxY + 5)
+		
+		let axisL1 = UILabel(frame: CGRect(x: Double(leftBar.frame.maxX + 5), y: yAL, width: 50, height: 16))
+		axisL1.text = "3hrs ago"
+		axisL1.font = UIFont (name: "Avenir-Book", size: 12)
+		self.view.addSubview(axisL1)
+		
+		let axisL2 = UILabel(frame: CGRect(x: Double(leftBar.frame.maxX + 5)+100, y: yAL, width: 50, height: 16))
+		axisL2.text = "2hrs ago"
+		axisL2.font = UIFont (name: "Avenir-Book", size: 12)
+		self.view.addSubview(axisL2)
+		
+		let axisL3 = UILabel(frame: CGRect(x: Double(leftBar.frame.maxX + 5)+200, y: yAL, width: 50, height: 16))
+		axisL3.text = "1hr ago"
+		axisL3.font = UIFont (name: "Avenir-Book", size: 12)
+		self.view.addSubview(axisL3)
 	}
 	
 	//handles the pan of the moving of the slider box
@@ -210,30 +229,6 @@ class MainVC: UIViewController {
 		task.resume()
 	}
 
-//	func getAndSetGrandpaLocationStatus() {
-//		let gLocation = ""
-//		
-//		//LOGIC FOR NAMING LOCATION HERE
-//		let url = URL(string: "http://23.92.20.162:5000/get-location/")
-//		
-//		let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
-//			if error != nil {
-//				print("Is the server running? Well you better go catch it.")
-//				return
-//			}
-//			let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-//			print(result ?? "You can't see this.")
-//			
-//			
-//			
-//		}
-//		
-//		task.resume()
-//		
-//		
-//		//grandpaStatusLabel.text = "Grandpa is currenty in the \(gLocation)"
-//	}
-	
 	func runTimer() {
 		let timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.grabModule), userInfo: nil, repeats: true)
 		timer.fire()

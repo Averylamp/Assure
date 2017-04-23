@@ -30,7 +30,7 @@ class GrandpaGraph: UIView {
 		
 		//Time
 		let timeTitle = UILabel(frame: CGRect(x: 0, y: grandpaTitle.frame.maxY + 2 , width: self.frame.width, height: 25))
-		timeTitle.text = "1pm to 2pm"
+		timeTitle.text = ""
 		timeTitle.textAlignment = NSTextAlignment.center
 		timeTitle.font = UIFont (name: "Avenir-Book", size: 20)
 		self.addSubview(timeTitle)
