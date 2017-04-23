@@ -29,7 +29,7 @@ class GrandpaGraph: UIView {
 		timeTitle.font = UIFont (name: "Avenir-Book", size: 20)
 		self.addSubview(timeTitle)
 		
-		//Bars
+		//Axis
 		let yAxis = UIView(frame: CGRect(x: 44, y: timeTitle.frame.maxY + 5, width: 4, height: 158))
 		yAxis.backgroundColor = .black
 		self.addSubview(yAxis)
@@ -38,6 +38,30 @@ class GrandpaGraph: UIView {
 		xAxis.backgroundColor = .black
 		self.addSubview(xAxis)
 		
+		//Labels
+		let graphLabel1 = UILabel(frame: CGRect(x: 50, y: xAxis.frame.maxY + 5, width: 76, height: 16))
+		graphLabel1.text = "Bedroom"
+		graphLabel1.textAlignment = NSTextAlignment.center
+		graphLabel1.font = UIFont (name: "Avenir-Book", size: 12)
+		self.addSubview(graphLabel1)
+		
+		let graphLabel2 = UILabel(frame: CGRect(x: 126, y: xAxis.frame.maxY + 5, width: 76, height: 16))
+		graphLabel2.text = "Living Room"
+		graphLabel2.textAlignment = NSTextAlignment.center
+		graphLabel2.font = UIFont (name: "Avenir-Book", size: 12)
+		self.addSubview(graphLabel2)
+		
+		let graphLabel3 = UILabel(frame: CGRect(x: 202, y: xAxis.frame.maxY + 5, width: 76, height: 16))
+		graphLabel3.text = "Kitchen"
+		graphLabel3.textAlignment = NSTextAlignment.center
+		graphLabel3.font = UIFont (name: "Avenir-Book", size: 12)
+		self.addSubview(graphLabel3)
+		
+		let graphLabel4 = UILabel(frame: CGRect(x: 280, y: xAxis.frame.maxY + 5, width: 76, height: 16))
+		graphLabel4.text = "Bathroom"
+		graphLabel4.textAlignment = NSTextAlignment.center
+		graphLabel4.font = UIFont (name: "Avenir-Book", size: 12)
+		self.addSubview(graphLabel4)
 		
 		
 		
