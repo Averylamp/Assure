@@ -15,12 +15,12 @@ class MainVC: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		//
-		let graphViewFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: 253)
+		//Graph View
+		let graphViewFrame = CGRect(x: 0, y: 20, width: view.frame.width, height: 300)
 		let graphView = GrandpaGraph(frame: graphViewFrame)
 		graphView.backgroundColor = .red //to be commented out after debugging
 		view.addSubview(graphView)
-		
+
 		
 		//Bottom View
 		let bottomView = UIView()
@@ -32,7 +32,8 @@ class MainVC: UIViewController {
 		grandpaStatusLabel.backgroundColor = UIColor(colorLiteralRed: 201/255.0, green: 201/255.0, blue: 201/255.0, alpha: 1)
 		grandpaStatusLabel.frame = CGRect(x: 0, y: 529, width: view.frame.width, height: 26)
 		grandpaStatusLabel.text = "Grandpa is currently in the kitchen"
-		UILabel.appearance().defaultFont = UIFont.systemFont(ofSize: 16)
+		grandpaStatusLabel.font = UIFont (name: "Avenir-Book", size: 16)
+		//UILabel.appearance().defaultFont = UIFont.systemFont(ofSize: 16)
 		grandpaStatusLabel.textAlignment = NSTextAlignment.center
 		view.addSubview(grandpaStatusLabel)
 		
