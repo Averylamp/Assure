@@ -10,6 +10,7 @@ import UIKit
 
 class MainVC: UIViewController {
 	
+	//class vars, which are called from multiple functions
 	let grandpaStatusLabel = UILabel()
 	var graphView = GrandpaGraph()
 
@@ -40,19 +41,16 @@ class MainVC: UIViewController {
 		
 		getAndSetGrandpaLocationStatus()
 		
-		
-		
+
 	}
 	
-	//this occurs on ecah touch
+	//this occurs on ecah touch, mostly used for debugging & testing
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		self.getGeneralLocationInfo()
 		//self.graphView.setGraphValues(v1: 60.0, v2: 15.0, v3: 30.0, v4: 40.0)
 	}
 	
-	
-	
-	
+	//
 	func getGeneralLocationInfo() {
 		
 		let url = URL(string: "http://23.92.20.162:5000/closestModule/")
