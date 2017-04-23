@@ -19,10 +19,10 @@ last_values = {}
 ##########################################################################################
 
 #posts a dictionary to the parse server on herokuapp
-def sendDictionaryToParse(data):
+def sendDictionaryToParse(data, class_name):
 	data = json.dumps(data)
 	parse_headers = {"X-Parse-Application-Id":"assure-parse-app","Content-Type":"application/json"}
-	r = requests.post("http://assure-parse.herokuapp.com/parse/classes/ProbeRequests", headers=parse_headers, data = data)
+	r = requests.post("http://assure-parse.herokuapp.com/parse/classes/" + class_name, headers=parse_headers, data = data)
 	if r.status_code == 201:
 		print("Parse object created")
 	else:
@@ -82,7 +82,7 @@ def processIncomingPostData():
 		data["distance"] = str(next_distance)
 	else:
 		last_values[data["fromMAC"]] = [float(data["distance"])]
-	sendDictionaryToParse(data)
+	sendDictionaryToParse(data, "ProbeRequests")
 	#return a message.
 	return "Thank you for your data."
 
@@ -141,6 +141,8 @@ def getClosestModule():
 		print(parse_results[0]["createdAt"])
 		mid = 1.0 / len(parse_results)
 		median = float(len(parse_results) / 2)
+		if median == 0 :
+			median = 1
 		distance = 0
 		# print(parse_config_resultss)
 		for i in range(len(parse_results)):
@@ -174,7 +176,7 @@ def getClosestModule():
 
 
 @app.route('/sendText/', methods=['GET','POST'])
-def send_message():
+def send_message(text):
 	print("------------------------------")
 	print("Send text initiated")
 	if request.values.get("message") is None:
@@ -196,7 +198,45 @@ def send_message():
 @app.route('/fall/', methods=['GET', 'POST'])
 def fallOccured():
 	print("A FALL HAS OCCURED.")
+	if request.values.get("message") is None:
+		return "No message sent"
+	else:
+		text = request.values.get("message")
+		send_message(text)
+		data = {}
+		data["dismissed"] = False
+		data["viewed"] = False
+		data["personName"] = "Grandpa"
+		data["alertMessage"] = text
+		data["positiveResponse"] = "On my way!"
+		sendDictionaryToParse(data, "Alerts")
+
 	return "Oh no!"
+
+@app.route('/lifeAlert/', methods=['GET', 'POST'])
+def lifeAlertOccured():
+	print("A FALL HAS OCCURED.")
+	if request.values.get("message") is None:
+		return "No message sent"
+	else:
+		text = request.values.get("message")
+		send_message(text)
+		data = {}
+		data["dismissed"] = False
+		data["viewed"] = False
+		data["personName"] = "Grandpa"
+		data["alertMessage"] = text
+		data["positiveResponse"] = "On my way!"
+		sendDictionaryToParse(data, "Alerts")
+
+	return "Oh no!"
+
+@app.route('/getResponse/', methods=['GET'])
+def currentlyResponding():
+	return "no response"
+
+
+
 
 @app.route('/get-location/', methods=['GET', 'POST'])
 def getLocation():
