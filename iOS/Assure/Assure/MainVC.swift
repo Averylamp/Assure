@@ -13,6 +13,8 @@ class MainVC: UIViewController {
 	//class vars, which are called from multiple functions
 	let grandpaStatusLabel = UILabel()
 	var graphView = GrandpaGraph()
+	let leftBar = UIView()
+	let rightBar = UIView()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -34,14 +36,13 @@ class MainVC: UIViewController {
 	
 	func setupMiddleSection() {
 		//Middle Area
+		
 		//left slider bar
-		let leftBar = UIView()
 		leftBar.frame = CGRect(x: 27, y: graphView.frame.maxY + 96, width: 4, height: 25)
 		leftBar.backgroundColor = .black
 		view.addSubview(leftBar)
 		
 		//right slider bar
-		let rightBar = UIView()
 		rightBar.frame = CGRect(x: view.frame.width - 27, y: graphView.frame.maxY + 96, width: 4, height: 25)
 		rightBar.backgroundColor = .black
 		view.addSubview(rightBar)
@@ -90,6 +91,33 @@ class MainVC: UIViewController {
 		cv7.frame = CGRect(x: Double(cv6.frame.maxX), y: cvY, width: Double(totalBarD*0.2), height: cvHeight )
 		view.addSubview(cv7)
 		
+		
+		let box = UIView()
+		box.frame = CGRect(x: rightBar.frame.minX-30, y: leftBar.frame.midY-15, width: 30, height: 30)
+		box.backgroundColor = .white
+		box.layer.borderWidth = 2
+		box.layer.borderColor = UIColor.black.cgColor
+		view.addSubview(box)
+		
+		
+		let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(recognizer:)))
+		box.addGestureRecognizer(pan)
+	}
+	
+//	func panBox(_ send:UIPanGestureRecognizer) {
+//		print("working")
+//	}
+	
+	func handlePan(recognizer:UIPanGestureRecognizer) {
+		let translation = recognizer.translation(in: self.view)
+		if let view = recognizer.view {
+			var newX = view.center.x + translation.x
+			newX = max(newX, leftBar.frame.maxX+14)	//sorry about the magic number 14.
+													//It's 10+4. 10 from half width, 4 from bar
+			newX = min(newX, rightBar.frame.minX-14)
+			view.center = CGPoint(x:newX, y: view.center.y)
+		}
+		recognizer.setTranslation(CGPoint.zero, in: self.view)
 	}
 	
 	func setupBottomSection() {
@@ -104,7 +132,6 @@ class MainVC: UIViewController {
 		grandpaStatusLabel.frame = CGRect(x: 0, y: 529, width: view.frame.width, height: 26)
 		grandpaStatusLabel.text = "Grandpa is currently in the kitchen"
 		grandpaStatusLabel.font = UIFont (name: "Avenir-Book", size: 16)
-		//UILabel.appearance().defaultFont = UIFont.systemFont(ofSize: 16)
 		grandpaStatusLabel.textAlignment = NSTextAlignment.center
 		view.addSubview(grandpaStatusLabel)
 		
@@ -113,8 +140,8 @@ class MainVC: UIViewController {
 	
 	//this occurs on ecah touch, mostly used for debugging & testing
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		self.getGeneralLocationInfo()
-		//self.graphView.setGraphValues(v1: 60.0, v2: 15.0, v3: 30.0, v4: 40.0)
+		//self.getGeneralLocationInfo()
+		self.graphView.setGraphValues(v1: 30.0, v2: 5.0, v3: 10.0, v4: 15.0)
 	}
 	
 	//
