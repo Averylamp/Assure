@@ -6,24 +6,16 @@
 #include <Wire.h>
 
 #define SPI_CLK 14
+#define WIFI_SERIAL Serial1
 
 MPU9250 imu;
-
 
 int16_t acc_mag;
 
 const float alpha = .9;
-const float alpha2 = .9;
-
-int sizeofarray = 10000;
-
-int last_readings[10000];
 
 int16_t current_reading = 0;
 int16_t last_reading = 0;
-
-int16_t current_reading2 = 0;
-int16_t last_reading2 = 0;
 
 int loop_count = 0;
 int times_fallen = 0;
@@ -33,14 +25,38 @@ int GREEN_PIN = 22;
 int RED_PIN = 23;
 int BLUE_PIN = 21;
 
-// String DATABASE_PATH = "/6S08dev/ejweber/ex03/slack.py";
-const String DATABASE_PATH = "http://23.92.20.162/";
+const String DEST = "23.92.20.162";
+const int PORT = 5000;
+
+
+// Global variables
+String MAC = "";
+String response = "";
+String keyword = "";
+
+String location = "";
+
 
 ESP8266 wifi = ESP8266(0,true);
 
+bool help_coming = false;
+
 // bool button_state = false;
 
-elapsedMillis time_since_fall = 0;
+elapsedMillis time_since_alert = 35000;
+const int alert_threshhold = 35000;
+
+elapsedMillis pulse_timer = 0;
+
+const int timer_per_pulse = 5000;
+int r_val = 0;
+int g_val = 255;
+int b_val = 0;
+
+String y_n = "N";
+
+elapsedMillis check_location_timer = 0;
+const int check_location_interval = 7000;
 
 void setup()
 {
@@ -48,24 +64,6 @@ void setup()
   Wire.begin();
   SPI.setSCK(14);
   SPI.begin();
-
-  byte c = imu.readByte(MPU9250_ADDRESS, WHO_AM_I_MPU9250);
-  Serial.print("MPU9250 "); Serial.print("I AM "); Serial.print(c, HEX);
-  Serial.println("MPU9250 is online...");
-
-  // Calibrate gyro and accelerometers, load biases in bias registers
-  imu.MPU9250SelfTest(imu.selfTest);
-  imu.initMPU9250();
-  imu.calibrateMPU9250(imu.gyroBias, imu.accelBias);
-  imu.initMPU9250();
-  imu.initAK8963(imu.factoryMagCalibration);
-
-  imu.getMres();
-  imu.getAres();
-  imu.getGres();
-
-  wifi.begin();
-  wifi.connectWifi("MIT", "");
 
   pinMode(BUTTON_PIN, INPUT_PULLUP);
   pinMode(RED_PIN, OUTPUT);
@@ -77,82 +75,114 @@ void setup()
   analogWrite(GREEN_PIN, 255);
   analogWrite(BLUE_PIN, 255);
 
-  // inialize last readings all to zero
-  for (int i = 0; i < sizeofarray; i = i + 1) {
-    last_readings[i] = 0;
-  }
+  wifi.begin();
+  wifi.connectWifi("MIT", "");
+  while (!wifi.isConnected()); //wait for connection
+  MAC = wifi.getMAC();
 
 }
 
 
 void loop() {
-  // compass.update();
-  // Serial.println(imu.)
-  // int16_t holder;
 
-  //print button state
-  // Serial.println(digitalRead(BUTTON_PIN));
+  pulse_led();
 
-  if (digitalRead(BUTTON_PIN) == 0) {
-    analogWrite(BLUE_PIN, 0);
-  } else {
+
+  // working
+  // int green_output = (pulse_timer % timer_per_pulse) * 510 / timer_per_pulse;
+  // if ( green_output > 255 ) {
+  //   green_output = 510 -  green_output;
+  // }
+  // analogWrite(GREEN_PIN, green_output);
+  // Serial.println(green_output);
+
+  while ( time_since_alert < alert_threshhold && !help_coming) {
+    analogWrite(RED_PIN, 0);
+    analogWrite(GREEN_PIN, 255);
     analogWrite(BLUE_PIN, 255);
+    if (y_n == "Y") {
+      help_coming = true;
+      for (int i = 0; i < 20; i ++ ) {
+        analogWrite(GREEN_PIN, 0);
+        delay(250);
+        analogWrite(GREEN_PIN, 255);
+        analogWrite(BLUE_PIN, 0);
+        delay(250);
+        analogWrite(BLUE_PIN, 255);
+      }
+    }
+    if (digitalRead(BUTTON_PIN) == 0) {
+      time_since_alert = alert_threshhold;
+      analogWrite(RED_PIN, 255);
+      analogWrite(GREEN_PIN, 0);
+      analogWrite(BLUE_PIN, 255);
+      delay(1000);
+      break;
+    }
+    if (check_location_timer > check_location_interval) {
+      String path = "/closestTeensy/";
+      String get_response = send_to_server("get", path, "");
+      Serial.println("Response: " + get_response);
+      int num = get_response.substring(6, 7).toInt();
+      y_n = get_response.substring(7, 8);
+      set_rgb(num);
+      check_location_timer = 0;
+    }
   }
 
-  if (loop_count % 50 == 0) {
-    loop_count = 0;
-    times_fallen = 0;
+  if (time_since_alert > alert_threshhold) help_coming = false;
+
+  if (check_location_timer > check_location_interval) {
+    String path = "/closestTeensy/";
+    String get_response = send_to_server("get", path, "");
+    Serial.println("Response: " + get_response);
+    int num = get_response.substring(6, 7).toInt();
+    y_n = get_response.substring(7, 8);
+    set_rgb(num);
+    check_location_timer = 0;
+  }
+
+
+  if (digitalRead(BUTTON_PIN) == 0) {
+    analogWrite(RED_PIN, 0);
+    analogWrite(GREEN_PIN, 255);
+    analogWrite(BLUE_PIN, 255);
+    String get_params = "message=Grandpa%20needs%20help.";
+    String path = "/lifeAlert/";
+    String get_response = send_to_server("get", path, get_params);
+    Serial.println("Response: " + get_response);
+    time_since_alert = 0;
+
+  } else {
+    // analogWrite(RED_PIN, 255);
   }
 
 
   imu.readAccelData(imu.accelCount);
-  // current_reading = imu.accelCount[1];
   current_reading = get_magnitude(imu.accelCount);
-
-  // Serial.print(imu.accelCount[0]);
-  // Serial.print(",");
-  // Serial.print(imu.accelCount[1]); //this is the one to use
-  // Serial.print(",");
-  // Serial.println(imu.accelCount[2]);
 
   if (last_reading == 0){
     last_reading = current_reading;
   }
-  if (last_reading2 == 0){
-    last_reading2 = current_reading;
-  }
-
   current_reading = int(alpha*current_reading) + int ( (1.0 - alpha) * last_reading );
   // Serial.println(current_reading);
-
   if (current_reading < -20000) {
     Serial.println("You fell.");
     analogWrite(RED_PIN, 0);
-    wifi.sendRequest(GET, DATABASE_PATH + "sendTest/?message=hello", 5000, "", "", true);
-    while (wifi.isBusy()) {}
-    delay(1000);
-    analogWrite(RED_PIN, 255);
+    analogWrite(GREEN_PIN, 255);
+    analogWrite(BLUE_PIN, 255);
+    String path = "/fall/";
+    String get_params = "message=Your%20dad%20just%20fell%20again.";
+    String get_response = send_to_server("get", path, get_params);
+    Serial.println("Response: " + get_response);
+    time_since_alert = 0;
+    // delay(1000);
+    // analogWrite(RED_PIN, 255);
   }
+
   last_reading = current_reading;
-  // int16_t last_reading2 = int(alpha2*current_reading) + int ( (1.0 - alpha) * last_reading2 );
 
-  // int nothing = get_entire_average(last_reading);
-  // Serial.println(last_reading);
-
-
-  if (last_reading > 5000) {
-    times_fallen++;
-  }
-  if (times_fallen > 3) {
-    // Serial.println("You fell.");
-    times_fallen = 0;
-  }
-
-  // Serial.print(",");
-  // Serial.println(last_reading2);
   delay(50);
-
-  loop_count++;
 
 }
 
@@ -160,75 +190,75 @@ int16_t get_magnitude(int16_t acc[3]) {
   return pow ( pow(acc[0], 2) + pow(acc[1], 2) + pow(acc[2], 2) , .5);
 }
 
-// int get_entire_average(int16_t current){
-//   for (int i = 0; i < sizeofarray - 1; i++){
-//     last_readings[i + 1] = last_readings[i];
-//   }
-//   last_readings[0] = current;
-//
-//   int sum = 0;
-//   for (int i = 0; i < sizeofarray - 1; i++){
-//     sum += last_readings[i];
-//   }
-//
-//   return (int)(sum*1.0 / sizeofarray*1.0);
-// }
 
-// void record_audio() {
-//   int sample_num = 0;    // counter for samples
-//   int enc_index = PREFIX_SIZE-1;    // index counter for encoded samples
-//   float time_between_samples = 1000000/SAMPLE_FREQ;
-//   int value = 0;
-//   int8_t raw_samples[3];   // 8-bit raw sample data array
-//   char enc_samples[4];     // encoded sample data array
-//
-//   while (sample_num<NUM_SAMPLES) {   //read in NUM_SAMPLES worth of audio data
-//     time_since_sample = 0;
-//     value = analogRead(AUDIO_IN);
-//     raw_samples[sample_num%3] = mulaw_encode(value-24427);
-//     sample_num++;
-//     if (sample_num%3 == 0) {
-//       base64_encode(enc_samples, (char *) raw_samples, 3);
-//       for (int i = 0; i < 4; i++) {
-//         speech_data[enc_index+i] = enc_samples[i];
-//       }
-//       enc_index += 4;
-//     }
-//
-//     // wait till next time to read
-//     while (time_since_sample <= time_between_samples) delayMicroseconds(10);
-//   }
-// }
-//
-// void send_from_teensy() {
-//   Serial.println("sending audio data from Teensy");
-//   wifi.sendBigRequest("speech.googleapis.com", 443, "/v1beta1/speech:syncrecognize?key=AIzaSyAoWHhpQixMaNuOtRhi1yIpNXL2ffICQTI", speech_data);
-// }
-//
-//
-// /* This code was obtained from
-// http://dystopiancode.blogspot.com/2012/02/pcm-law-and-u-law-companding-algorithms.html
-// */
-// int8_t mulaw_encode(int16_t number)
-// {
-//    const uint16_t MULAW_MAX = 0x1FFF;
-//    const uint16_t MULAW_BIAS = 33;
-//    uint16_t mask = 0x1000;
-//    uint8_t sign = 0;
-//    uint8_t position = 12;
-//    uint8_t lsb = 0;
-//    if (number < 0)
-//    {
-//       number = -number;
-//       sign = 0x80;
-//    }
-//    number += MULAW_BIAS;
-//    if (number > MULAW_MAX)
-//    {
-//       number = MULAW_MAX;
-//    }
-//    for (; ((number & mask) != mask && position >= 5); mask >>= 1, position--)
-//         ;
-//    lsb = (number >> (position - 4)) & 0x0f;
-//    return (~(sign | ((position - 5) << 4) | lsb));
-// }
+String send_to_server(String request_type, String path, String data) {
+  if (request_type == "post") {
+    wifi.sendRequest(POST, DEST, PORT, path, data);
+  } else if (request_type == "get") {
+    wifi.sendRequest(GET, DEST, PORT, path, data);
+  }
+  elapsedMillis start_timer = 0;
+  while (!wifi.hasResponse() && start_timer < 5000);
+  if (wifi.hasResponse()) {
+    response = wifi.getResponse();
+    return response;
+  }
+  return "Not in time.";
+}
+
+
+void pulse_led() {
+  int red_output = (pulse_timer % timer_per_pulse) * (r_val *2) / timer_per_pulse;
+  if ( red_output > r_val ) {
+    red_output = r_val*2 -  red_output;
+  }
+  analogWrite(RED_PIN, 255 - red_output);
+
+  int green_output = (pulse_timer % timer_per_pulse) * (g_val *2) / timer_per_pulse;
+  if ( green_output > g_val ) {
+    green_output = g_val*2 -  green_output;
+  }
+  analogWrite(GREEN_PIN, 255 - green_output);
+
+  int blue_output = (pulse_timer % timer_per_pulse) * (b_val *2) / timer_per_pulse;
+  if ( blue_output > b_val ) {
+    blue_output = b_val*2 -  blue_output;
+  }
+  analogWrite(BLUE_PIN, 255 - blue_output);
+}
+
+void set_rgb(int n) {
+  // switch n:
+  switch ( n ) {
+    case 2:
+    {
+      r_val = 255;
+      g_val = 140;
+      b_val = 154;
+    }
+    break;
+    case 4:
+    {
+      r_val = 108;
+      g_val = 164;
+      b_val = 255;
+    }
+    break;
+    case 5:
+    {
+      r_val = 246;
+      g_val = 166;
+      b_val = 35;
+    }
+    break;
+    case 6:
+    {
+      r_val = 0;
+      g_val = 255;
+      b_val = 0;
+    }
+    break;
+  default:
+  break;
+  }
+}
