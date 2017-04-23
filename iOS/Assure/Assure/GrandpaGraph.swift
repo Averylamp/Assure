@@ -29,7 +29,7 @@ class GrandpaGraph: UIView {
 		self.addSubview(grandpaTitle)
 		
 		//Time
-		let timeTitle = UILabel(frame: CGRect(x: 0, y: grandpaTitle.frame.maxY + 2 , width: self.frame.width, height: 50))
+		let timeTitle = UILabel(frame: CGRect(x: 0, y: grandpaTitle.frame.maxY + 2 , width: self.frame.width, height: 25))
 		timeTitle.text = "1pm to 2pm"
 		timeTitle.textAlignment = NSTextAlignment.center
 		timeTitle.font = UIFont (name: "Avenir-Book", size: 20)
@@ -107,7 +107,6 @@ class GrandpaGraph: UIView {
 		let h3 = v3/maxTime * maxHeight
 		let h4 = v4/maxTime * maxHeight
 		print(graphBar1.frame)
-		
 		
 		UIView.animate(withDuration: 0.5, delay: 0.4,
 		               options: [.curveEaseInOut],

@@ -10,6 +10,7 @@ import UIKit
 
 class MainVC: UIViewController {
 	
+	//class vars, which are called from multiple functions
 	let grandpaStatusLabel = UILabel()
 	var graphView = GrandpaGraph()
 
@@ -22,6 +23,10 @@ class MainVC: UIViewController {
 		graphView.backgroundColor = .red //to be commented out after debugging
 		view.addSubview(graphView)
 
+		
+		//Middle Area
+		
+		
 		
 		//Bottom View
 		let bottomView = UIView()
@@ -38,23 +43,42 @@ class MainVC: UIViewController {
 		grandpaStatusLabel.textAlignment = NSTextAlignment.center
 		view.addSubview(grandpaStatusLabel)
 		
-		getGrandpaLocationStatus()
 		
 		
 		
+		
+		
+		getAndSetGrandpaLocationStatus()
+		
+
 	}
 	
+	//this occurs on ecah touch, mostly used for debugging & testing
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		self.graphView.setGraphValues(v1: 60.0, v2: 15.0, v3: 30.0, v4: 40.0)
+		self.getGeneralLocationInfo()
+		//self.graphView.setGraphValues(v1: 60.0, v2: 15.0, v3: 30.0, v4: 40.0)
 	}
 	
-//	override func viewDidAppear(_ animated: Bool) {
-//		super.viewDidAppear(animated)
-//		print("doing it")
-//		graphView.setGraphValues(v1: 60.0, v2: 120.0, v3: 15.0, v4: 240.0)
-//	}
-	
-	func getGrandpaLocationStatus() {
+	//
+	func getGeneralLocationInfo() {
+		
+		let url = URL(string: "http://23.92.20.162:5000/closestModule/")
+		
+		let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+			if error != nil {
+				print("Is the server running? Well you better go catch it.")
+				return
+			}
+			let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+			print(result ?? "You can't see this.")
+		}
+		
+		task.resume()
+		
+		
+	}
+
+	func getAndSetGrandpaLocationStatus() {
 		let gLocation = ""
 		
 		//LOGIC FOR NAMING LOCATION HERE
@@ -73,5 +97,7 @@ class MainVC: UIViewController {
 		
 		grandpaStatusLabel.text = "Grandpa is currenty in the \(gLocation)"
 	}
+	
+	
 
 }
