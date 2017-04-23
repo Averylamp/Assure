@@ -151,22 +151,22 @@ class MainVC: UIViewController {
 	//sets up the bottom area of the main view
 	func setupBottomSection() {
 		
-		let ivWidth = view.frame.width/2.0-40
+		let ivWidth = view.frame.width/2.0-20
 		let ivHeight = 0.490797546 * ivWidth
 		
 		bedroomIV.frame = CGRect(x: 20, y: leftBar.frame.maxY+50, width: ivWidth, height: ivHeight)
 		bedroomIV.image = UIImage(named: "bedroomoff.png")
 		view.addSubview(bedroomIV)
 		
-		bathroomIV.frame = CGRect(x: bedroomIV.frame.maxX+40, y: leftBar.frame.maxY+50, width: ivWidth, height: ivHeight)
+		bathroomIV.frame = CGRect(x: bedroomIV.frame.maxX+20, y: leftBar.frame.maxY+50, width: ivWidth, height: ivHeight)
 		bathroomIV.image = UIImage(named: "bathroomoff.png")
 		view.addSubview(bathroomIV)
 		
-		kitchenIV.frame = CGRect(x: bedroomIV.frame.maxX+40, y: bedroomIV.frame.maxY + 40, width: ivWidth, height: ivHeight)
+		kitchenIV.frame = CGRect(x: bedroomIV.frame.maxX+20, y: bedroomIV.frame.maxY + 20, width: ivWidth, height: ivHeight)
 		kitchenIV.image = UIImage(named: "kitchenoff.png")
 		view.addSubview(kitchenIV)
 		
-		livingIV.frame = CGRect(x: 20, y: bedroomIV.frame.maxY + 40, width: ivWidth, height: ivHeight)
+		livingIV.frame = CGRect(x: 20, y: bedroomIV.frame.maxY + 20, width: ivWidth, height: ivHeight)
 		livingIV.image = UIImage(named: "livingoff.png")
 		view.addSubview(livingIV)
 		
@@ -187,11 +187,24 @@ class MainVC: UIViewController {
 			}
 			let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
 			
-			let closestRoomAsStringWithNum = result[result.startIndex]
+			let closestRoomAsStringWithNum = result?.substring(to: 1)
 			
-			
-			
-			
+			UIView.animate(withDuration: 0.5, delay: 0.4,
+			               options: [.curveEaseInOut],
+			               animations: {
+							
+							if (closestRoomAsStringWithNum == "2") {
+								self.turnBathroomOn()
+							} else if (closestRoomAsStringWithNum == "4") {
+								self.turnBedroomOn()
+							} else if (closestRoomAsStringWithNum == "5") {
+								self.turnKitchenOn()
+							} else if (closestRoomAsStringWithNum == "6") {
+								self.turnLivingOn()
+							} else {
+								print("something's gone wrong!")
+							}
+			})
 		}
 		
 		task.resume()
