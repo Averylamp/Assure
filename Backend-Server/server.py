@@ -80,7 +80,7 @@ def processIncomingPostData():
 		data["distance"] = str(next_distance)
 	else:
 		last_values[data["fromMAC"]] = [float(data["distance"])]
-	sendDataToParse(data)
+	sendDictionaryToParse(data)
 	#return a message.
 	return "Thank you for your data."
 
@@ -188,7 +188,7 @@ def send_message():
 
 # Code for sending a fall-request
 @app.route('/fall/', methods=['GET', 'POST'])
-def fall-occured():
+def fallOccured():
 	print("A FALL HAS OCCURED.")
 
 # run the app!
