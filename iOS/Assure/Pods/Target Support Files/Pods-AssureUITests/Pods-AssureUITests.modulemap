@@ -1,0 +1,6 @@
+framework module Pods_AssureUITests {
+  umbrella header "Pods-AssureUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

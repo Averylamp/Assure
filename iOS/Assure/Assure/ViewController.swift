@@ -20,5 +20,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func loginButtonClicked(_ sender: Any) {
+        let MainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainVC") as! MainVC
+        self.navigationController?.pushViewController(MainVC, animated: true)
+
+        
+    }
 
 }
