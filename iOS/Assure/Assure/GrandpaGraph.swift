@@ -86,11 +86,11 @@ class GrandpaGraph: UIView {
 		self.graphBar3.backgroundColor = UIColor(colorLiteralRed: 245/255.0, green: 166/255.0, blue: 35/255.0, alpha: 1)
 		self.addSubview(self.graphBar3)
 	
-		//self.setGraphValues(v1: 60.0, v2: 15.0, v3: 30.0, v4: 40.0)
-		
 		self.graphBar4.frame = CGRect(x: 283, y: xAxis.frame.minY-100, width: 65, height: 100)
 		self.graphBar4.backgroundColor = UIColor(colorLiteralRed: 255/255.0, green: 140/255.0, blue: 154/255.0, alpha: 1)
 		self.addSubview(self.graphBar4)
+		
+		self.setGraphValues(v1: 30.0, v2: 5.0, v3: 10.0, v4: 15.0)
 		
 	}
 	

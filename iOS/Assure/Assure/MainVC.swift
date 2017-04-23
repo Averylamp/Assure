@@ -154,19 +154,19 @@ class MainVC: UIViewController {
 		let ivWidth = view.frame.width/2.0-20
 		let ivHeight = 0.490797546 * ivWidth
 		
-		bedroomIV.frame = CGRect(x: 20, y: leftBar.frame.maxY+50, width: ivWidth, height: ivHeight)
+		bedroomIV.frame = CGRect(x: 20, y: leftBar.frame.maxY+100, width: ivWidth, height: ivHeight)
 		bedroomIV.image = UIImage(named: "bedroomoff.png")
 		view.addSubview(bedroomIV)
 		
-		bathroomIV.frame = CGRect(x: bedroomIV.frame.maxX+20, y: leftBar.frame.maxY+50, width: ivWidth, height: ivHeight)
+		bathroomIV.frame = CGRect(x: bedroomIV.frame.maxX+10, y: bedroomIV.frame.minY, width: ivWidth, height: ivHeight)
 		bathroomIV.image = UIImage(named: "bathroomoff.png")
 		view.addSubview(bathroomIV)
 		
-		kitchenIV.frame = CGRect(x: bedroomIV.frame.maxX+20, y: bedroomIV.frame.maxY + 20, width: ivWidth, height: ivHeight)
+		kitchenIV.frame = CGRect(x: bedroomIV.frame.maxX+10, y: bedroomIV.frame.maxY + 10, width: ivWidth, height: ivHeight)
 		kitchenIV.image = UIImage(named: "kitchenoff.png")
 		view.addSubview(kitchenIV)
 		
-		livingIV.frame = CGRect(x: 20, y: bedroomIV.frame.maxY + 20, width: ivWidth, height: ivHeight)
+		livingIV.frame = CGRect(x: 20, y: bedroomIV.frame.maxY + 10, width: ivWidth, height: ivHeight)
 		livingIV.image = UIImage(named: "livingoff.png")
 		view.addSubview(livingIV)
 		
