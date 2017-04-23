@@ -12,6 +12,13 @@
 		B984323E1EAC2DE100BF3B8F /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984323D1EAC2DE100BF3B8F /* MainVC.swift */; };
 		B98432401EAC421B00BF3B8F /* GrandpaGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984323F1EAC421B00BF3B8F /* GrandpaGraph.swift */; };
 		B98432421EACBFE300BF3B8F /* bedroomon.png in Resources */ = {isa = PBXBuildFile; fileRef = B98432411EACBFE300BF3B8F /* bedroomon.png */; };
+		B98432441EACC25E00BF3B8F /* bathroomoff.png in Resources */ = {isa = PBXBuildFile; fileRef = B98432431EACC25E00BF3B8F /* bathroomoff.png */; };
+		B98432461EACC28500BF3B8F /* kitchenoff.png in Resources */ = {isa = PBXBuildFile; fileRef = B98432451EACC28500BF3B8F /* kitchenoff.png */; };
+		B98432481EACC2A800BF3B8F /* livingoff.png in Resources */ = {isa = PBXBuildFile; fileRef = B98432471EACC2A800BF3B8F /* livingoff.png */; };
+		B984324A1EACC32300BF3B8F /* bedroomoff.png in Resources */ = {isa = PBXBuildFile; fileRef = B98432491EACC32300BF3B8F /* bedroomoff.png */; };
+		B984324C1EACC35F00BF3B8F /* bathroomon.png in Resources */ = {isa = PBXBuildFile; fileRef = B984324B1EACC35F00BF3B8F /* bathroomon.png */; };
+		B984324E1EACC3A900BF3B8F /* livingon.png in Resources */ = {isa = PBXBuildFile; fileRef = B984324D1EACC3A900BF3B8F /* livingon.png */; };
+		B98432501EACC3EE00BF3B8F /* kitchenon.png in Resources */ = {isa = PBXBuildFile; fileRef = B984324F1EACC3EE00BF3B8F /* kitchenon.png */; };
 		BB1C954D1EAC674D0068E71C /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C954C1EAC674D0068E71C /* AlertViewController.swift */; };
 		BB1C954F1EAC67630068E71C /* AlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C954E1EAC67630068E71C /* AlertTableViewCell.swift */; };
 		BBC667FA1EABEBA100555263 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC667F91EABEBA100555263 /* AppDelegate.swift */; };
@@ -52,6 +59,13 @@
 		B984323D1EAC2DE100BF3B8F /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		B984323F1EAC421B00BF3B8F /* GrandpaGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrandpaGraph.swift; sourceTree = "<group>"; };
 		B98432411EACBFE300BF3B8F /* bedroomon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bedroomon.png; sourceTree = "<group>"; };
+		B98432431EACC25E00BF3B8F /* bathroomoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bathroomoff.png; sourceTree = "<group>"; };
+		B98432451EACC28500BF3B8F /* kitchenoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitchenoff.png; sourceTree = "<group>"; };
+		B98432471EACC2A800BF3B8F /* livingoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = livingoff.png; sourceTree = "<group>"; };
+		B98432491EACC32300BF3B8F /* bedroomoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bedroomoff.png; sourceTree = "<group>"; };
+		B984324B1EACC35F00BF3B8F /* bathroomon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bathroomon.png; sourceTree = "<group>"; };
+		B984324D1EACC3A900BF3B8F /* livingon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = livingon.png; sourceTree = "<group>"; };
+		B984324F1EACC3EE00BF3B8F /* kitchenon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitchenon.png; sourceTree = "<group>"; };
 		BB1C954C1EAC674D0068E71C /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		BB1C954E1EAC67630068E71C /* AlertTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertTableViewCell.swift; sourceTree = "<group>"; };
 		BBC667F61EABEBA100555263 /* Assure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assure.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +136,21 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B98432511EACC51900BF3B8F /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B98432411EACBFE300BF3B8F /* bedroomon.png */,
+				B98432491EACC32300BF3B8F /* bedroomoff.png */,
+				B98432431EACC25E00BF3B8F /* bathroomoff.png */,
+				B984324B1EACC35F00BF3B8F /* bathroomon.png */,
+				B98432451EACC28500BF3B8F /* kitchenoff.png */,
+				B984324F1EACC3EE00BF3B8F /* kitchenon.png */,
+				B98432471EACC2A800BF3B8F /* livingoff.png */,
+				B984324D1EACC3A900BF3B8F /* livingon.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		BBC667ED1EABEBA100555263 = {
 			isa = PBXGroup;
 			children = (
@@ -151,10 +180,10 @@
 				BBC667FB1EABEBA100555263 /* ViewController.swift */,
 				B984323D1EAC2DE100BF3B8F /* MainVC.swift */,
 				B984323F1EAC421B00BF3B8F /* GrandpaGraph.swift */,
-				BBC667FD1EABEBA100555263 /* Main.storyboard */,
 				BB1C954C1EAC674D0068E71C /* AlertViewController.swift */,
 				BB1C954E1EAC67630068E71C /* AlertTableViewCell.swift */,
-				B98432411EACBFE300BF3B8F /* bedroomon.png */,
+				BBC667FD1EABEBA100555263 /* Main.storyboard */,
+				B98432511EACC51900BF3B8F /* Images */,
 				BBC668001EABEBA100555263 /* Assets.xcassets */,
 				BBC668021EABEBA100555263 /* LaunchScreen.storyboard */,
 				BBC668051EABEBA100555263 /* Info.plist */,
@@ -299,9 +328,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B98432461EACC28500BF3B8F /* kitchenoff.png in Resources */,
+				B984324E1EACC3A900BF3B8F /* livingon.png in Resources */,
 				BBC668041EABEBA100555263 /* LaunchScreen.storyboard in Resources */,
 				B98432421EACBFE300BF3B8F /* bedroomon.png in Resources */,
+				B98432441EACC25E00BF3B8F /* bathroomoff.png in Resources */,
+				B98432501EACC3EE00BF3B8F /* kitchenon.png in Resources */,
+				B984324C1EACC35F00BF3B8F /* bathroomon.png in Resources */,
+				B984324A1EACC32300BF3B8F /* bedroomoff.png in Resources */,
 				BBC668011EABEBA100555263 /* Assets.xcassets in Resources */,
+				B98432481EACC2A800BF3B8F /* livingoff.png in Resources */,
 				BBC667FF1EABEBA100555263 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
