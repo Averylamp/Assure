@@ -40,10 +40,56 @@ class MainVC: UIViewController {
 		leftBar.backgroundColor = .black
 		view.addSubview(leftBar)
 		
+		//right slider bar
 		let rightBar = UIView()
 		rightBar.frame = CGRect(x: view.frame.width - 27, y: graphView.frame.maxY + 96, width: 4, height: 25)
 		rightBar.backgroundColor = .black
 		view.addSubview(rightBar)
+		
+		//color views: generic naming for fast changing
+		let totalBarD = rightBar.frame.minX - leftBar.frame.maxX
+		let cvHeight = 20.0
+		let cvY = Double(leftBar.frame.midY) - cvHeight/2.0
+		let green = UIColor(colorLiteralRed: 104/255.0, green: 209/255.0, blue: 184/255.0, alpha: 1)
+		let blue = UIColor(colorLiteralRed: 114/255.0, green: 160/255.0, blue: 235/255.0, alpha: 1)
+		let orange = UIColor(colorLiteralRed: 245/255.0, green: 166/255.0, blue: 35/255.0, alpha: 1)
+		let pink = UIColor(colorLiteralRed: 255/255.0, green: 140/255.0, blue: 154/255.0, alpha: 1)
+		
+		let cv1 = UIView()
+		cv1.backgroundColor = green
+		cv1.frame = CGRect(x: Double(leftBar.frame.maxX), y: cvY, width: Double(totalBarD*0.3), height: cvHeight )
+		view.addSubview(cv1)
+		
+		let cv2 = UIView()
+		cv2.backgroundColor = blue
+		cv2.frame = CGRect(x: Double(cv1.frame.maxX), y: cvY, width: Double(totalBarD*0.10), height: cvHeight )
+		view.addSubview(cv2)
+		
+		let cv3 = UIView()
+		cv3.backgroundColor = orange
+		cv3.frame = CGRect(x: Double(cv2.frame.maxX), y: cvY, width: Double(totalBarD*0.15), height: cvHeight )
+		view.addSubview(cv3)
+		
+		let cv4 = UIView()
+		cv4.backgroundColor = blue
+		cv4.frame = CGRect(x: Double(cv3.frame.maxX), y: cvY, width: Double(totalBarD*0.15), height: cvHeight )
+		view.addSubview(cv4)
+		
+		let cv5 = UIView()
+		cv5.backgroundColor = pink
+		cv5.frame = CGRect(x: Double(cv4.frame.maxX), y: cvY, width: Double(totalBarD*0.05), height: cvHeight )
+		view.addSubview(cv5)
+		
+		let cv6 = UIView()
+		cv6.backgroundColor = blue
+		cv6.frame = CGRect(x: Double(cv5.frame.maxX), y: cvY, width: Double(totalBarD*0.05), height: cvHeight )
+		view.addSubview(cv6)
+		
+		let cv7 = UIView()
+		cv7.backgroundColor = green
+		cv7.frame = CGRect(x: Double(cv6.frame.maxX), y: cvY, width: Double(totalBarD*0.2), height: cvHeight )
+		view.addSubview(cv7)
+		
 	}
 	
 	func setupBottomSection() {
