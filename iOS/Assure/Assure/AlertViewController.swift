@@ -94,7 +94,16 @@ class AlertViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func sendPositiveResposne(sender:UIButton){
-        
+        let url = URL(string: "http://23.92.20.162:5000/positiveResponse/")
+        let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+            if error != nil {
+                print("Is the server running? Well you better go catch it.")
+                return
+            }
+            let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            print(result)
+        }
+        task.resume()
     }
     
     /*

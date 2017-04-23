@@ -116,6 +116,7 @@ def getClosestTeensy():
 def handlePositiveResponse():
 	global last_app_response
 	last_app_response = datetime.now()
+	return "Positive response OK"
 
 @app.route('/closestModule/', methods=['GET'])
 def getClosestModule():
