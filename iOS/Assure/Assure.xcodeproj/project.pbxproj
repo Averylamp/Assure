@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F3D3D3EDA4ED123A9A34932 /* Pods_AssureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FBFA2F206A436D41E77C8D4 /* Pods_AssureTests.framework */; };
+		3838E3F7B1EA27A2C7977B79 /* Pods_Assure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E88CFF3B51ADB2D372A397 /* Pods_Assure.framework */; };
+		B984323E1EAC2DE100BF3B8F /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984323D1EAC2DE100BF3B8F /* MainVC.swift */; };
+		B98432401EAC421B00BF3B8F /* GrandpaGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = B984323F1EAC421B00BF3B8F /* GrandpaGraph.swift */; };
+		B98432421EACBFE300BF3B8F /* bedroomon.png in Resources */ = {isa = PBXBuildFile; fileRef = B98432411EACBFE300BF3B8F /* bedroomon.png */; };
+		B98432441EACC25E00BF3B8F /* bathroomoff.png in Resources */ = {isa = PBXBuildFile; fileRef = B98432431EACC25E00BF3B8F /* bathroomoff.png */; };
+		B98432461EACC28500BF3B8F /* kitchenoff.png in Resources */ = {isa = PBXBuildFile; fileRef = B98432451EACC28500BF3B8F /* kitchenoff.png */; };
+		B98432481EACC2A800BF3B8F /* livingoff.png in Resources */ = {isa = PBXBuildFile; fileRef = B98432471EACC2A800BF3B8F /* livingoff.png */; };
+		B984324A1EACC32300BF3B8F /* bedroomoff.png in Resources */ = {isa = PBXBuildFile; fileRef = B98432491EACC32300BF3B8F /* bedroomoff.png */; };
+		B984324C1EACC35F00BF3B8F /* bathroomon.png in Resources */ = {isa = PBXBuildFile; fileRef = B984324B1EACC35F00BF3B8F /* bathroomon.png */; };
+		B984324E1EACC3A900BF3B8F /* livingon.png in Resources */ = {isa = PBXBuildFile; fileRef = B984324D1EACC3A900BF3B8F /* livingon.png */; };
+		B98432501EACC3EE00BF3B8F /* kitchenon.png in Resources */ = {isa = PBXBuildFile; fileRef = B984324F1EACC3EE00BF3B8F /* kitchenon.png */; };
+		BB1C954D1EAC674D0068E71C /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C954C1EAC674D0068E71C /* AlertViewController.swift */; };
+		BB1C954F1EAC67630068E71C /* AlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1C954E1EAC67630068E71C /* AlertTableViewCell.swift */; };
 		BBC667FA1EABEBA100555263 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC667F91EABEBA100555263 /* AppDelegate.swift */; };
 		BBC667FC1EABEBA100555263 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC667FB1EABEBA100555263 /* ViewController.swift */; };
 		BBC667FF1EABEBA100555263 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC667FD1EABEBA100555263 /* Main.storyboard */; };
@@ -14,6 +28,7 @@
 		BBC668041EABEBA100555263 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBC668021EABEBA100555263 /* LaunchScreen.storyboard */; };
 		BBC6680F1EABEBA100555263 /* AssureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC6680E1EABEBA100555263 /* AssureTests.swift */; };
 		BBC6681A1EABEBA100555263 /* AssureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC668191EABEBA100555263 /* AssureUITests.swift */; };
+		DB1F5DED105219382555EC3D /* Pods_AssureUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B866494B0613993A9FA2906E /* Pods_AssureUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +49,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1FBFA2F206A436D41E77C8D4 /* Pods_AssureTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AssureTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		338E984B6417EBFAADAA88B1 /* Pods-AssureTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssureTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AssureTests/Pods-AssureTests.release.xcconfig"; sourceTree = "<group>"; };
+		36078D60D7E054163578C68F /* Pods-AssureUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssureUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AssureUITests/Pods-AssureUITests.release.xcconfig"; sourceTree = "<group>"; };
+		37FA343820FD2DB49E2F08C5 /* Pods-Assure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assure.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Assure/Pods-Assure.debug.xcconfig"; sourceTree = "<group>"; };
+		4EA7B788A3B5EDB51572E9AA /* Pods-AssureUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssureUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AssureUITests/Pods-AssureUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		9F450090AE91877E1051ADCF /* Pods-AssureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssureTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AssureTests/Pods-AssureTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B866494B0613993A9FA2906E /* Pods_AssureUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AssureUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B984323D1EAC2DE100BF3B8F /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		B984323F1EAC421B00BF3B8F /* GrandpaGraph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrandpaGraph.swift; sourceTree = "<group>"; };
+		B98432411EACBFE300BF3B8F /* bedroomon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bedroomon.png; sourceTree = "<group>"; };
+		B98432431EACC25E00BF3B8F /* bathroomoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bathroomoff.png; sourceTree = "<group>"; };
+		B98432451EACC28500BF3B8F /* kitchenoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitchenoff.png; sourceTree = "<group>"; };
+		B98432471EACC2A800BF3B8F /* livingoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = livingoff.png; sourceTree = "<group>"; };
+		B98432491EACC32300BF3B8F /* bedroomoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bedroomoff.png; sourceTree = "<group>"; };
+		B984324B1EACC35F00BF3B8F /* bathroomon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bathroomon.png; sourceTree = "<group>"; };
+		B984324D1EACC3A900BF3B8F /* livingon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = livingon.png; sourceTree = "<group>"; };
+		B984324F1EACC3EE00BF3B8F /* kitchenon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitchenon.png; sourceTree = "<group>"; };
+		BB1C954C1EAC674D0068E71C /* AlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		BB1C954E1EAC67630068E71C /* AlertTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertTableViewCell.swift; sourceTree = "<group>"; };
 		BBC667F61EABEBA100555263 /* Assure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assure.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC667F91EABEBA100555263 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBC667FB1EABEBA100555263 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +81,8 @@
 		BBC668151EABEBA100555263 /* AssureUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssureUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBC668191EABEBA100555263 /* AssureUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssureUITests.swift; sourceTree = "<group>"; };
 		BBC6681B1EABEBA100555263 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEF9469452FF99308C24791B /* Pods-Assure.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Assure.release.xcconfig"; path = "Pods/Target Support Files/Pods-Assure/Pods-Assure.release.xcconfig"; sourceTree = "<group>"; };
+		F9E88CFF3B51ADB2D372A397 /* Pods_Assure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Assure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3838E3F7B1EA27A2C7977B79 /* Pods_Assure.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F3D3D3EDA4ED123A9A34932 /* Pods_AssureTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,12 +106,51 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB1F5DED105219382555EC3D /* Pods_AssureUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5130792AC6C7BD5E233B1C21 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F9E88CFF3B51ADB2D372A397 /* Pods_Assure.framework */,
+				1FBFA2F206A436D41E77C8D4 /* Pods_AssureTests.framework */,
+				B866494B0613993A9FA2906E /* Pods_AssureUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9778850DAB5C9A5B6392694D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				37FA343820FD2DB49E2F08C5 /* Pods-Assure.debug.xcconfig */,
+				BEF9469452FF99308C24791B /* Pods-Assure.release.xcconfig */,
+				9F450090AE91877E1051ADCF /* Pods-AssureTests.debug.xcconfig */,
+				338E984B6417EBFAADAA88B1 /* Pods-AssureTests.release.xcconfig */,
+				4EA7B788A3B5EDB51572E9AA /* Pods-AssureUITests.debug.xcconfig */,
+				36078D60D7E054163578C68F /* Pods-AssureUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B98432511EACC51900BF3B8F /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B98432411EACBFE300BF3B8F /* bedroomon.png */,
+				B98432491EACC32300BF3B8F /* bedroomoff.png */,
+				B98432431EACC25E00BF3B8F /* bathroomoff.png */,
+				B984324B1EACC35F00BF3B8F /* bathroomon.png */,
+				B98432451EACC28500BF3B8F /* kitchenoff.png */,
+				B984324F1EACC3EE00BF3B8F /* kitchenon.png */,
+				B98432471EACC2A800BF3B8F /* livingoff.png */,
+				B984324D1EACC3A900BF3B8F /* livingon.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		BBC667ED1EABEBA100555263 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +158,8 @@
 				BBC6680D1EABEBA100555263 /* AssureTests */,
 				BBC668181EABEBA100555263 /* AssureUITests */,
 				BBC667F71EABEBA100555263 /* Products */,
+				9778850DAB5C9A5B6392694D /* Pods */,
+				5130792AC6C7BD5E233B1C21 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,7 +178,12 @@
 			children = (
 				BBC667F91EABEBA100555263 /* AppDelegate.swift */,
 				BBC667FB1EABEBA100555263 /* ViewController.swift */,
+				B984323D1EAC2DE100BF3B8F /* MainVC.swift */,
+				B984323F1EAC421B00BF3B8F /* GrandpaGraph.swift */,
+				BB1C954C1EAC674D0068E71C /* AlertViewController.swift */,
+				BB1C954E1EAC67630068E71C /* AlertTableViewCell.swift */,
 				BBC667FD1EABEBA100555263 /* Main.storyboard */,
+				B98432511EACC51900BF3B8F /* Images */,
 				BBC668001EABEBA100555263 /* Assets.xcassets */,
 				BBC668021EABEBA100555263 /* LaunchScreen.storyboard */,
 				BBC668051EABEBA100555263 /* Info.plist */,
@@ -132,9 +216,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBC6681E1EABEBA100555263 /* Build configuration list for PBXNativeTarget "Assure" */;
 			buildPhases = (
+				9BDC47A1D06FD0B2F70015C2 /* [CP] Check Pods Manifest.lock */,
 				BBC667F21EABEBA100555263 /* Sources */,
 				BBC667F31EABEBA100555263 /* Frameworks */,
 				BBC667F41EABEBA100555263 /* Resources */,
+				192160B49B056B9FAFFF9143 /* [CP] Embed Pods Frameworks */,
+				D645CE32BB05EE1BFE986667 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,9 +236,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBC668211EABEBA100555263 /* Build configuration list for PBXNativeTarget "AssureTests" */;
 			buildPhases = (
+				865C95881AD6923FB0308C02 /* [CP] Check Pods Manifest.lock */,
 				BBC668061EABEBA100555263 /* Sources */,
 				BBC668071EABEBA100555263 /* Frameworks */,
 				BBC668081EABEBA100555263 /* Resources */,
+				1F1EABD0EB8C94BD30527EEC /* [CP] Embed Pods Frameworks */,
+				76D3EFF3CD085B8F7C888505 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,9 +257,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BBC668241EABEBA100555263 /* Build configuration list for PBXNativeTarget "AssureUITests" */;
 			buildPhases = (
+				D614FD42B02BDF70256F3C5C /* [CP] Check Pods Manifest.lock */,
 				BBC668111EABEBA100555263 /* Sources */,
 				BBC668121EABEBA100555263 /* Frameworks */,
 				BBC668131EABEBA100555263 /* Resources */,
+				F6640BE7B14E43C73D81BEB7 /* [CP] Embed Pods Frameworks */,
+				AF66610622CDD2B3081E1E09 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -235,8 +328,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B98432461EACC28500BF3B8F /* kitchenoff.png in Resources */,
+				B984324E1EACC3A900BF3B8F /* livingon.png in Resources */,
 				BBC668041EABEBA100555263 /* LaunchScreen.storyboard in Resources */,
+				B98432421EACBFE300BF3B8F /* bedroomon.png in Resources */,
+				B98432441EACC25E00BF3B8F /* bathroomoff.png in Resources */,
+				B98432501EACC3EE00BF3B8F /* kitchenon.png in Resources */,
+				B984324C1EACC35F00BF3B8F /* bathroomon.png in Resources */,
+				B984324A1EACC32300BF3B8F /* bedroomoff.png in Resources */,
 				BBC668011EABEBA100555263 /* Assets.xcassets in Resources */,
+				B98432481EACC2A800BF3B8F /* livingoff.png in Resources */,
 				BBC667FF1EABEBA100555263 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,12 +358,154 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		192160B49B056B9FAFFF9143 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Assure/Pods-Assure-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1F1EABD0EB8C94BD30527EEC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AssureTests/Pods-AssureTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76D3EFF3CD085B8F7C888505 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AssureTests/Pods-AssureTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		865C95881AD6923FB0308C02 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9BDC47A1D06FD0B2F70015C2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AF66610622CDD2B3081E1E09 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AssureUITests/Pods-AssureUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D614FD42B02BDF70256F3C5C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D645CE32BB05EE1BFE986667 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Assure/Pods-Assure-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6640BE7B14E43C73D81BEB7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AssureUITests/Pods-AssureUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BBC667F21EABEBA100555263 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB1C954F1EAC67630068E71C /* AlertTableViewCell.swift in Sources */,
+				B98432401EAC421B00BF3B8F /* GrandpaGraph.swift in Sources */,
 				BBC667FC1EABEBA100555263 /* ViewController.swift in Sources */,
+				B984323E1EAC2DE100BF3B8F /* MainVC.swift in Sources */,
+				BB1C954D1EAC674D0068E71C /* AlertViewController.swift in Sources */,
 				BBC667FA1EABEBA100555263 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,6 +656,7 @@
 		};
 		BBC6681F1EABEBA100555263 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37FA343820FD2DB49E2F08C5 /* Pods-Assure.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = R4DQ2L3FBV;
@@ -426,6 +670,7 @@
 		};
 		BBC668201EABEBA100555263 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BEF9469452FF99308C24791B /* Pods-Assure.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = R4DQ2L3FBV;
@@ -439,6 +684,7 @@
 		};
 		BBC668221EABEBA100555263 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F450090AE91877E1051ADCF /* Pods-AssureTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -454,6 +700,7 @@
 		};
 		BBC668231EABEBA100555263 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 338E984B6417EBFAADAA88B1 /* Pods-AssureTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -469,6 +716,7 @@
 		};
 		BBC668251EABEBA100555263 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EA7B788A3B5EDB51572E9AA /* Pods-AssureUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = R4DQ2L3FBV;
@@ -483,6 +731,7 @@
 		};
 		BBC668261EABEBA100555263 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36078D60D7E054163578C68F /* Pods-AssureUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = R4DQ2L3FBV;
@@ -514,6 +763,7 @@
 				BBC668201EABEBA100555263 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BBC668211EABEBA100555263 /* Build configuration list for PBXNativeTarget "AssureTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +772,7 @@
 				BBC668231EABEBA100555263 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BBC668241EABEBA100555263 /* Build configuration list for PBXNativeTarget "AssureUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +781,7 @@
 				BBC668261EABEBA100555263 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
