@@ -9,8 +9,6 @@
 import UIKit
 
 class GrandpaGraph: UIView {
-
-	let timeTitle = UILabel()
 	
 	let graphBar1 = UIView()
 	let graphBar2 = UIView()
@@ -22,21 +20,21 @@ class GrandpaGraph: UIView {
 		super.init(frame: frame)
 		
 		//Title
-		let grandpaTitle = UILabel(frame: CGRect(x: 0, y: 2, width: self.frame.width, height: 25))
-		grandpaTitle.text = "Grandpa's Activity"
+		let grandpaTitle = UILabel(frame: CGRect(x: 0, y: 12, width: self.frame.width, height: 25))
+		grandpaTitle.text = "Grandpa's Recent Activity"
 		grandpaTitle.textAlignment = NSTextAlignment.center
 		grandpaTitle.font = UIFont (name: "Avenir-Book", size: 20)
 		self.addSubview(grandpaTitle)
 		
-		//Time
-		let timeTitle = UILabel(frame: CGRect(x: 0, y: grandpaTitle.frame.maxY + 2 , width: self.frame.width, height: 25))
-		timeTitle.text = "1pm to 2pm"
-		timeTitle.textAlignment = NSTextAlignment.center
-		timeTitle.font = UIFont (name: "Avenir-Book", size: 20)
-		self.addSubview(timeTitle)
+		//yAxisLabel
+		let yAxisLabel = UILabel(frame: CGRect(x: 0, y: grandpaTitle.frame.maxY + 5, width: 44, height: 16))
+		yAxisLabel.text = "60 min"
+		yAxisLabel.textAlignment = NSTextAlignment.center
+		yAxisLabel.font = UIFont (name: "Avenir-Book", size: 12)
+		self.addSubview(yAxisLabel)
 		
 		//Axis
-		let yAxis = UIView(frame: CGRect(x: 44, y: timeTitle.frame.maxY + 5, width: 4, height: 158))
+		let yAxis = UIView(frame: CGRect(x: 44, y: grandpaTitle.frame.maxY + 5, width: 4, height: 158))
 		yAxis.backgroundColor = .black
 		self.addSubview(yAxis)
 		

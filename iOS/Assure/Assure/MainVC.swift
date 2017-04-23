@@ -44,9 +44,8 @@ class MainVC: UIViewController {
 	
 	func setupGraphView() {
 		//Graph View
-		let graphViewFrame = CGRect(x: 0, y: 20, width: view.frame.width, height: 300)
+		let graphViewFrame = CGRect(x: 0, y: 30, width: view.frame.width, height: 290)
 		graphView = GrandpaGraph(frame: graphViewFrame)
-		//		graphView.backgroundColor = .red //to be commented out after debugging
 		view.addSubview(graphView)
 	}
 	
@@ -54,12 +53,12 @@ class MainVC: UIViewController {
 		//Middle Area
 		
 		//left slider bar
-		leftBar.frame = CGRect(x: 27, y: graphView.frame.maxY, width: 4, height: 25)
+		leftBar.frame = CGRect(x: 27, y: graphView.frame.maxY-10, width: 4, height: 25)
 		leftBar.backgroundColor = .black
 		view.addSubview(leftBar)
 		
 		//right slider bar
-		rightBar.frame = CGRect(x: view.frame.width - 27, y: graphView.frame.maxY , width: 4, height: 25)
+		rightBar.frame = CGRect(x: view.frame.width - 27, y: graphView.frame.maxY - 10, width: 4, height: 25)
 		rightBar.backgroundColor = .black
 		view.addSubview(rightBar)
 		
@@ -74,37 +73,27 @@ class MainVC: UIViewController {
 		
 		
 		cv1.backgroundColor = green
-		cv1.frame = CGRect(x: Double(leftBar.frame.maxX), y: cvY, width: Double(totalBarD*0.3), height: cvHeight )
-		view.addSubview(cv1)
-		
-		
 		cv2.backgroundColor = blue
-		cv2.frame = CGRect(x: Double(cv1.frame.maxX), y: cvY, width: Double(totalBarD*0.10), height: cvHeight )
-		view.addSubview(cv2)
-		
-		
 		cv3.backgroundColor = orange
-		cv3.frame = CGRect(x: Double(cv2.frame.maxX), y: cvY, width: Double(totalBarD*0.15), height: cvHeight )
-		view.addSubview(cv3)
-		
-		
 		cv4.backgroundColor = blue
-		cv4.frame = CGRect(x: Double(cv3.frame.maxX), y: cvY, width: Double(totalBarD*0.15), height: cvHeight )
-		view.addSubview(cv4)
-		
-		
 		cv5.backgroundColor = pink
-		cv5.frame = CGRect(x: Double(cv4.frame.maxX), y: cvY, width: Double(totalBarD*0.05), height: cvHeight )
-		view.addSubview(cv5)
-		
-		
 		cv6.backgroundColor = blue
-		cv6.frame = CGRect(x: Double(cv5.frame.maxX), y: cvY, width: Double(totalBarD*0.05), height: cvHeight )
-		view.addSubview(cv6)
-		
-		
 		cv7.backgroundColor = green
-		cv7.frame = CGRect(x: Double(cv6.frame.maxX), y: cvY, width: Double(totalBarD*0.2), height: cvHeight )
+		
+		cv1.frame = CGRect(x: Double(leftBar.frame.maxX), y: cvY, width: Double(totalBarD*0.3), height: cvHeight)
+		cv2.frame = CGRect(x: Double(cv1.frame.maxX), y: cvY, width: Double(totalBarD*0.10), height: cvHeight)
+		cv3.frame = CGRect(x: Double(cv2.frame.maxX), y: cvY, width: Double(totalBarD*0.15), height: cvHeight)
+		cv4.frame = CGRect(x: Double(cv3.frame.maxX), y: cvY, width: Double(totalBarD*0.15), height: cvHeight)
+		cv5.frame = CGRect(x: Double(cv4.frame.maxX), y: cvY, width: Double(totalBarD*0.05), height: cvHeight)
+		cv6.frame = CGRect(x: Double(cv5.frame.maxX), y: cvY, width: Double(totalBarD*0.05), height: cvHeight)
+		cv7.frame = CGRect(x: Double(cv6.frame.maxX), y: cvY, width: Double(totalBarD*0.2), height: cvHeight)
+		
+		view.addSubview(cv1)
+		view.addSubview(cv2)
+		view.addSubview(cv3)
+		view.addSubview(cv4)
+		view.addSubview(cv5)
+		view.addSubview(cv6)
 		view.addSubview(cv7)
 		
 		let box = UIView()
@@ -116,6 +105,25 @@ class MainVC: UIViewController {
 		
 		let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(recognizer:)))
 		box.addGestureRecognizer(pan)
+		
+		//adding labels below slider
+		
+		let yAL = Double(leftBar.frame.maxY + 5)
+		
+		let axisL1 = UILabel(frame: CGRect(x: Double(leftBar.frame.maxX + 5), y: yAL, width: 50, height: 16))
+		axisL1.text = "3hrs ago"
+		axisL1.font = UIFont (name: "Avenir-Book", size: 12)
+		self.view.addSubview(axisL1)
+		
+		let axisL2 = UILabel(frame: CGRect(x: Double(leftBar.frame.maxX + 5)+100, y: yAL, width: 50, height: 16))
+		axisL2.text = "2hrs ago"
+		axisL2.font = UIFont (name: "Avenir-Book", size: 12)
+		self.view.addSubview(axisL2)
+		
+		let axisL3 = UILabel(frame: CGRect(x: Double(leftBar.frame.maxX + 5)+200, y: yAL, width: 50, height: 16))
+		axisL3.text = "1hr ago"
+		axisL3.font = UIFont (name: "Avenir-Book", size: 12)
+		self.view.addSubview(axisL3)
 	}
 	
 	//handles the pan of the moving of the slider box
@@ -154,7 +162,7 @@ class MainVC: UIViewController {
 		let ivWidth = view.frame.width/2.0-20
 		let ivHeight = 0.490797546 * ivWidth
 		
-		bedroomIV.frame = CGRect(x: 20, y: leftBar.frame.maxY+100, width: ivWidth, height: ivHeight)
+		bedroomIV.frame = CGRect(x: 20, y: leftBar.frame.maxY+144, width: ivWidth, height: ivHeight)
 		bedroomIV.image = UIImage(named: "bedroomoff.png")
 		view.addSubview(bedroomIV)
 		
@@ -169,6 +177,12 @@ class MainVC: UIViewController {
 		livingIV.frame = CGRect(x: 20, y: bedroomIV.frame.maxY + 10, width: ivWidth, height: ivHeight)
 		livingIV.image = UIImage(named: "livingoff.png")
 		view.addSubview(livingIV)
+		
+		let currentTitle = UILabel(frame: CGRect(x: 0, y: bedroomIV.frame.minY - 44, width: view.frame.width, height: 25))
+		currentTitle.text = "Grandpa's Current Location"
+		currentTitle.textAlignment = NSTextAlignment.center
+		currentTitle.font = UIFont (name: "Avenir-Book", size: 20)
+		view.addSubview(currentTitle)
 		
 	}
 	
@@ -210,32 +224,8 @@ class MainVC: UIViewController {
 		task.resume()
 	}
 
-//	func getAndSetGrandpaLocationStatus() {
-//		let gLocation = ""
-//		
-//		//LOGIC FOR NAMING LOCATION HERE
-//		let url = URL(string: "http://23.92.20.162:5000/get-location/")
-//		
-//		let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
-//			if error != nil {
-//				print("Is the server running? Well you better go catch it.")
-//				return
-//			}
-//			let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-//			print(result ?? "You can't see this.")
-//			
-//			
-//			
-//		}
-//		
-//		task.resume()
-//		
-//		
-//		//grandpaStatusLabel.text = "Grandpa is currenty in the \(gLocation)"
-//	}
-	
 	func runTimer() {
-		let timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.grabModule), userInfo: nil, repeats: true)
+		let timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.grabModule), userInfo: nil, repeats: true)
 		timer.fire()
 	}
 	
