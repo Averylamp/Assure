@@ -24,6 +24,10 @@ class MainVC: UIViewController {
 		view.addSubview(graphView)
 
 		
+		//Middle Area
+		
+		
+		
 		//Bottom View
 		let bottomView = UIView()
 		bottomView.backgroundColor = UIColor(colorLiteralRed: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 1)
@@ -38,6 +42,11 @@ class MainVC: UIViewController {
 		//UILabel.appearance().defaultFont = UIFont.systemFont(ofSize: 16)
 		grandpaStatusLabel.textAlignment = NSTextAlignment.center
 		view.addSubview(grandpaStatusLabel)
+		
+		
+		
+		
+		
 		
 		getAndSetGrandpaLocationStatus()
 		
@@ -88,5 +97,7 @@ class MainVC: UIViewController {
 		
 		grandpaStatusLabel.text = "Grandpa is currenty in the \(gLocation)"
 	}
+	
+	
 
 }
