@@ -225,7 +225,7 @@ class MainVC: UIViewController {
 	}
 
 	func runTimer() {
-		let timer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.grabModule), userInfo: nil, repeats: true)
+		let timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.grabModule), userInfo: nil, repeats: true)
 		timer.fire()
 	}
 	
