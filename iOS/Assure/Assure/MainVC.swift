@@ -17,17 +17,36 @@ class MainVC: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		//Set up all main views
+		setupGraphView()
+		setupMiddleSection()
+		setupBottomSection()
+	}
+	
+	
+	func setupGraphView() {
 		//Graph View
 		let graphViewFrame = CGRect(x: 0, y: 20, width: view.frame.width, height: 300)
 		graphView = GrandpaGraph(frame: graphViewFrame)
-//		graphView.backgroundColor = .red //to be commented out after debugging
+		//		graphView.backgroundColor = .red //to be commented out after debugging
 		view.addSubview(graphView)
-
-		
+	}
+	
+	func setupMiddleSection() {
 		//Middle Area
+		//left slider bar
+		let leftBar = UIView()
+		leftBar.frame = CGRect(x: 27, y: graphView.frame.maxY + 96, width: 4, height: 25)
+		leftBar.backgroundColor = .black
+		view.addSubview(leftBar)
 		
-		
-		
+		let rightBar = UIView()
+		rightBar.frame = CGRect(x: view.frame.width - 27, y: graphView.frame.maxY + 96, width: 4, height: 25)
+		rightBar.backgroundColor = .black
+		view.addSubview(rightBar)
+	}
+	
+	func setupBottomSection() {
 		//Bottom View
 		let bottomView = UIView()
 		bottomView.backgroundColor = UIColor(colorLiteralRed: 237/255.0, green: 237/255.0, blue: 237/255.0, alpha: 1)
@@ -43,14 +62,7 @@ class MainVC: UIViewController {
 		grandpaStatusLabel.textAlignment = NSTextAlignment.center
 		view.addSubview(grandpaStatusLabel)
 		
-		
-		
-		
-		
-		
 		getAndSetGrandpaLocationStatus()
-		
-
 	}
 	
 	//this occurs on ecah touch, mostly used for debugging & testing
