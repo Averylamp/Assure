@@ -91,11 +91,31 @@ def processIncomingGetData():
 	print "GET REQUEST"
 	return "GET Requests Currently Do Not Serve A Purpose"
 
+last_app_response = datetime.now()
+
 @app.route('/closestTeensy/', methods=['GET'])
 def getClosestTeensy():
 	closest_module = getClosestModule()
-	print("<html>" + closest_module[0] + "</html>")
-	return "<html>" + closest_module[0] + "</html>"
+	returnVal = closest_module[0]
+	if returnVal == "N":
+		returnVal = "0"
+	global	last_app_response
+	now = datetime.now()
+	diff_dates = now - last_app_response
+	invalid_interval = 35
+	if diff_dates.total_seconds() > invalid_interval:
+		returnVal += "N"
+	else:
+		returnVal += "Y"
+	print("Last alert response - {} seconds ago".format(diff_dates.total_seconds()))
+
+	print("<html>" + returnVal + "</html>")
+	return "<html>" + returnVal + "</html>"
+
+@app.route('/positiveResponse/', methods=['GET'])
+def handlePositiveResponse():
+	global last_app_response
+	last_app_response = datetime.now()
 
 @app.route('/closestModule/', methods=['GET'])
 def getClosestModule():
@@ -247,11 +267,7 @@ def lifeAlertOccured():
 		sendDictionaryToParse(data, "Alerts")
 	return "Oh no!"
 
-@app.route('/getResponse/', methods=['GET'])
-def currentlyResponding():
-	return "no response"
-
-
+state = "NONE"
 
 
 @app.route('/get-location/', methods=['GET', 'POST'])
