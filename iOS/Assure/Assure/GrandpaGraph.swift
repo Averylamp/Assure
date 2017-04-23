@@ -38,33 +38,51 @@ class GrandpaGraph: UIView {
 		xAxis.backgroundColor = .black
 		self.addSubview(xAxis)
 		
+		//Label Constants
+		let labelY = xAxis.frame.maxY + 5
+		
 		//Labels
-		let graphLabel1 = UILabel(frame: CGRect(x: 50, y: xAxis.frame.maxY + 5, width: 76, height: 16))
+		let graphLabel1 = UILabel(frame: CGRect(x: 50, y: labelY, width: 76, height: 16))
 		graphLabel1.text = "Bedroom"
 		graphLabel1.textAlignment = NSTextAlignment.center
 		graphLabel1.font = UIFont (name: "Avenir-Book", size: 12)
 		self.addSubview(graphLabel1)
 		
-		let graphLabel2 = UILabel(frame: CGRect(x: 126, y: xAxis.frame.maxY + 5, width: 76, height: 16))
+		let graphLabel2 = UILabel(frame: CGRect(x: 126, y: labelY, width: 76, height: 16))
 		graphLabel2.text = "Living Room"
 		graphLabel2.textAlignment = NSTextAlignment.center
 		graphLabel2.font = UIFont (name: "Avenir-Book", size: 12)
 		self.addSubview(graphLabel2)
 		
-		let graphLabel3 = UILabel(frame: CGRect(x: 202, y: xAxis.frame.maxY + 5, width: 76, height: 16))
+		let graphLabel3 = UILabel(frame: CGRect(x: 202, y: labelY, width: 76, height: 16))
 		graphLabel3.text = "Kitchen"
 		graphLabel3.textAlignment = NSTextAlignment.center
 		graphLabel3.font = UIFont (name: "Avenir-Book", size: 12)
 		self.addSubview(graphLabel3)
 		
-		let graphLabel4 = UILabel(frame: CGRect(x: 280, y: xAxis.frame.maxY + 5, width: 76, height: 16))
+		let graphLabel4 = UILabel(frame: CGRect(x: 280, y: labelY, width: 76, height: 16))
 		graphLabel4.text = "Bathroom"
 		graphLabel4.textAlignment = NSTextAlignment.center
 		graphLabel4.font = UIFont (name: "Avenir-Book", size: 12)
 		self.addSubview(graphLabel4)
 		
+		//bars
 		
+		let graphBar1 = UIView(frame: CGRect(x: 57, y: xAxis.frame.minY-100, width: 65, height: 100))
+		graphBar1.backgroundColor = UIColor(colorLiteralRed: 114/255.0, green: 160/255.0, blue: 235/255.0, alpha: 1)
+		self.addSubview(graphBar1)
 		
+		let graphBar2 = UIView(frame: CGRect(x: 133, y: xAxis.frame.minY-100, width: 65, height: 100))
+		graphBar2.backgroundColor = UIColor(colorLiteralRed: 104/255.0, green: 209/255.0, blue: 184/255.0, alpha: 1)
+		self.addSubview(graphBar2)
+		
+		let graphBar3 = UIView(frame: CGRect(x: 208, y: xAxis.frame.minY-100, width: 65, height: 100))
+		graphBar3.backgroundColor = UIColor(colorLiteralRed: 245/255.0, green: 166/255.0, blue: 35/255.0, alpha: 1)
+		self.addSubview(graphBar3)
+		
+		let graphBar4 = UIView(frame: CGRect(x: 283, y: xAxis.frame.minY-100, width: 65, height: 100))
+		graphBar4.backgroundColor = UIColor(colorLiteralRed: 255/255.0, green: 140/255.0, blue: 154/255.0, alpha: 1)
+		self.addSubview(graphBar4)
 		
 		
 	}

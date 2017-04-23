@@ -51,7 +51,7 @@ class MainVC: UIViewController {
 		
 		let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
 			if error != nil {
-				print("Something Terrible Has Happened. Run!")
+				print("Is the server running? Well you better go catch it.")
 				return
 			}
 			let result = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
