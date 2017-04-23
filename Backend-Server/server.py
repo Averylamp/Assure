@@ -13,13 +13,39 @@ app = Flask(__name__)
 
 last_values = {}
 
+
+##########################################################################################
+############################### HELPER FUNCTIONS #########################################
+##########################################################################################
+
+#posts a dictionary to the parse server on herokuapp
+def sendDictionaryToParse(data):
+	data = json.dumps(data)
+	parse_headers = {"X-Parse-Application-Id":"assure-parse-app","Content-Type":"application/json"}
+	r = requests.post("http://assure-parse.herokuapp.com/parse/classes/ProbeRequests", headers=parse_headers, data = data)
+	if r.status_code == 201:
+		print("Parse object created")
+	else:
+		print("Error adding to database")
+		print(r.text)
+
+#returns the difference between now and the datestring
+def withinSecondsFromNow(datestring, seconds):
+	format_str = "%Y-%m-%dT%H:%M:%S"
+	datetime_obj = datetime.strptime(datestring, format_str)
+#	datetime_obj = datetime_obj + timedelta(hours=0)
+	now = datetime.now()
+	difference = now - datetime_obj
+#	print("Difference seconds = {}".format(difference.total_seconds()))
+	return difference.total_seconds() < seconds
+
+##########################################################################################
+############################### HANDLING REQUESTS ########################################
+##########################################################################################
+
 #Handle post requests from the root directory
 @app.route('/', methods=['POST'])
 def processIncomingPostData():
-	#ask for data by calling request.values.get("PARAMETER_NAME")
-	# print request.values.get("from_mac")
-	# print request.values.get("device")
-	# print request.values.get("rssi")
 	if request.values.get("from_mac") is None:
 		print("invalid params")
 		return "No valid parameters"
@@ -54,30 +80,14 @@ def processIncomingPostData():
 		data["distance"] = str(next_distance)
 	else:
 		last_values[data["fromMAC"]] = [float(data["distance"])]
-	data = json.dumps(data)
-	parse_headers = {"X-Parse-Application-Id":"assure-parse-app","Content-Type":"application/json"}
-	r = requests.post("http://assure-parse.herokuapp.com/parse/classes/ProbeRequests", headers=parse_headers, data = data)
-	if r.status_code == 201:
-		print("Parse object created")
-	else:
-		print("Error adding to database")
-		print(r.text)
+	sendDictionaryToParse(data)
 	#return a message.
 	return "Thank you for your data."
 
 @app.route('/', methods=['GET'])
 def processIncomingGetData():
 	print "GET REQUEST"
-	return "GET out of town. Get it? Get it."
-
-def withinSecondsFromNow(datestring, seconds):
-	format_str = "%Y-%m-%dT%H:%M:%S"
-	datetime_obj = datetime.strptime(datestring, format_str)
-#	datetime_obj = datetime_obj + timedelta(hours=0)
-	now = datetime.now()
-	difference = now - datetime_obj
-#	print("Difference seconds = {}".format(difference.total_seconds()))
-	return difference.total_seconds() < seconds
+	return "GET Requests Currently Do Not Serve A Purpose"
 
 @app.route('/closestModule', methods=['GET'])
 def getClosestModule():
@@ -176,6 +186,10 @@ def send_message():
 		print("Sent Message")
 	return "Success, sent messages"
 
+# Code for sending a fall-request
+@app.route('/fall/', methods=['GET', 'POST'])
+def fallOccured():
+	print("A FALL HAS OCCURED.")
 
 # run the app!
 if __name__ == "__main__":
